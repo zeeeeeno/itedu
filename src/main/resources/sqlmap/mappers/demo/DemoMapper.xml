@@ -1,8 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.gsitm.career.mapper">
-    <select id="selectUser">
-        select *
-          from users
+<mapper namespace="com.gsitm.career.mapper.DemoMapper">
+    <select id="selectUser" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        select * from member
     </select>
+
+    <insert id="memberInsert">
+        insert into member(member_email, member_pw, member_name, member_postNo, member_addr) values(#{param1}, #{param2}, #{param3}, #{param4}, #{param5})
+    </insert>
+
+    <select id="getPassword" resultType="java.lang.String">
+        select member_pw from member where member_email = #{param1}
+    </select>
+
+    <select id="getMemberInfo" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        select *
+        from member
+        where member_email = #{param1}
+    </select>
+
+    <select id="selectNotice" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        select * from notice
+        where use_YN = 1
+        order by notice_no desc
+    </select>
+
+    <insert id="savePost">
+        insert into notice(notice_title, notice_contents)
+        values(#{param1}, #{param2})
+    </insert>
+
+    <select id="noticeRead" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        select * from notice where notice_no = #{param1}
+    </select>
+
+    <update id="updateNotice">
+        update notice set notice_title = #{param2}, notice_contents = #{param3}
+        where notice_no = #{param1}
+    </update>
+
+    <update id="deleteNotice">
+        update notice
+        set use_YN = 0
+        where notice_no = #{param1}
+    </update>
+
+    <select id="lectureList1" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        select lecture_no, lecture_name, lecture_teacher, lecture_period, lecture_price, lecture_category_mainCategory, lecture_category_subCategory, lecture_contents, lecture_thumbnail, lecture_creDate, lecture_academy
+        from lecture
+        where lecture_category_mainCategory = #{param1}
+    </select>
+
+    <select id="lectureList2" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        select lecture_no, lecture_name, lecture_teacher, lecture_period, lecture_price, lecture_category_mainCategory, lecture_category_subCategory, lecture_contents, lecture_thumbnail, lecture_creDate, lecture_academy
+        from lecture
+        where lecture_category_mainCategory = #{param1} and lecture_category_subCategory = #{param2}
+    </select>
+
+    <insert id="signUp">
+        insert into academy(academy_email, academy_pw, academy_name) values(#{param1}, #{param2}, #{param3})
+    </insert>
+
+    <select id="getAcademyInfo" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        select *
+        from academy
+        where academy_email = #{param1}
+    </select>
+
+    <select id="getPasswordAcademy" resultType="java.lang.String">
+        select academy_pw
+        from academy
+        where academy_email = #{param1}
+    </select>
+
+    <insert id="insertLecture">
+        insert into lecture(lecture_name, lecture_teacher, lecture_period, lecture_price, lecture_category_mainCategory, lecture_category_subCategory, lecture_contents, lecture_thumbnail)
+        values(#{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, #{param9})
+    </insert>
 </mapper>

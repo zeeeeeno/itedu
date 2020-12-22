@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body th:fragment="gnbFragment">
+    <div id="myOverlay" class="overlay" style="background-color: rgba(0, 0, 0, 0.9); z-index: 10">
+      <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
+      <div class="overlay-content">
+        <form action="#">
+          <input type="text" placeholder="Search.." name="search">
+          <button type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </div>
+    <div id="gnbNavBar">
+        <a href="/" class="gnbNavbarA">
+            <i class="far fa-moon" aria-hidden="true" style="color: #ffffff; font-size: 20px; vertical-align: middle;"></i>
+        </a>
+        <a th:href="@{/lecture/Programming}" class="gnbNavbarA">Programming</a>
+        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=ITSecurity" class="gnbNavbarA">IT Security</a>
+        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=DataScience" class="gnbNavbarA">Data Science</a>
+        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=Creative" class="gnbNavbarA">Creative</a>
+        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=WorkSkill" class="gnbNavbarA">Work Skill</a>
+        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=JobBasic" class="gnbNavbarA">Job Basic</a>
+        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=Career" class="gnbNavbarA">Career</a>
+        <a class="gnbNavbarA" id="gnbNavbarA"> <!-- onclick="openSearch()" / spring boot 활용 시 구현  -->
+            <i class="fas fa-search" aria-hidden="true" style="color: #ffffff; font-size: 20px; vertical-align: middle;"></i>
+        </a>
+        <div class="dropdown text-center" id="dropdown_menu">
+            <a class="dropdown-toggle gnbNavbarA" data-toggle="dropdown">
+                <i class="fas fa-shopping-bag" aria-hidden="true" style="color:#ffffff; font-size:20px; vertical-align: middle;
+                "></i>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-center">
+<!--                 <li><a><%= memberVO.getMember_name() %></a></li>
+                <li><a href="/ITEdu/adminListAll.do?numAcademy=1&numLecture=1&numMember=1">Manage</a></li>
+                <li class="divider"></li>
+                <li><a href="/ITEdu/noticeList.do?num=1">Notice</a></li>
+                <li><a href="/ITEdu/views/SliderLogin/Logout.jsp">Logout</a></li>
+
+                <li><a><%= academyVO.getAcademy_email() %></a></li>
+                Spring boot 연동 시 구현
+                    <li><a href="/ITEdu/views/academy/academy.jsp">Academy</a></li>
+
+                <li><a href="/ITEdu/views/academy/upload.jsp">UpLoad</a></li>
+                <li class="divider"></li>
+                <li><a href="/ITEdu/noticeList.do?num=1">Notice</a></li>
+                <li><a href="/ITEdu/views/SliderLogin/Logout.jsp">Logout</a></li>
+
+                <li><a><%= memberVO.getMember_name() %></a></li>
+                <li><a href="/ITEdu/views/user/mypage.jsp">MyPage</a></li>
+                <li class="divider"></li>
+                <li><a href="/ITEdu/noticeList.do?num=1">Notice</a></li>
+                <li><a href="/ITEdu/views/SliderLogin/Logout.jsp">Logout</a></li> -->
+
+                <li th:if="${session['member']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['member'][0].memberName}"></a></li>
+                <li th:if="${session['academy']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['academy'][0].academyName}"></a></li>
+                <li th:if="${session['academy']}"><a href="/lecture/upload">UpLoad</a></li>
+                <li th:if="${session['member']} == null and ${session['academy']} == null"><a href="/login/signIn">Sign In</a></li>
+                <li th:if="${session['member']} == null and ${session['academy']} == null"><a href="/academy/">Contact Us</a></li>
+                <li class="divider"></li>
+                <li><a href="/notice/">Notice</a></li>
+                <li th:if="${session['member']} or ${session['academy']}"><a href="/logout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+<script>
+function openSearch() {
+  document.getElementById("myOverlay").style.display = "block";
+  document.getElementById(".form-slider").style.display = "block";
+}
+
+function closeSearch() {
+  document.getElementById("myOverlay").style.display = "none";
+}
+</script>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/lectureListLayout">
+<body layout:fragment="content">
+    <div class="search-container" style="width: 100%; height: 70px;">
+        <form action="#search_action">
+            <button type="submit"><i class="fa fa-search"></i></button>
+            <input type="text" placeholder="강의 검색하기" name="search" id="myInput">
+        </form>
+    </div>
+    <hr width="80%">
+    <div id="contents_container">
+        <div id="contents_title">
+            <p>전체 | <strong> 프로그래밍</strong></p>
+        </div>
+        <div id="contents_content">
+           <div th:each="lec : ${lecture}" class="content_container" id="content_container" style="width: 214px; height: 330px; margin: 20px; flex-wrap: wrap; flex-direction: row;">
+                <a id="content_a">
+                    <div>
+                        <figure>
+                             <img src="/ITEdu/fileFolder/<%=lectureVO.getLectureThumbnail()%>" id="lecure_img"/>
+                        </figure>
+                    </div>
+                    <div id="content_title" th:text="${lec.lectureName}"><%= lectureVO.getLectureTitle() %></div>
+                    <div class="content_inContents" th:text="${lec.lectureTeacher}" style="margin-left: 5px;"><%= lectureVO.getLectureTeacher() %> </div>
+                    <div class="content_inContents" th:text="${lec.lecturePrice}" style="margin-left: 5px;">₩<%= decimalFormat.format(price) %></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

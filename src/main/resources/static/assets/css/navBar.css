@@ -1,0 +1,190 @@
+@charset "EUC-KR";
+
+#gnbNavBar_body {
+    margin: 0px;
+    font-family: Arial;  
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#gnbNavBar {
+    background-color: rgb(65, 65, 65); 
+    width: 100%;
+    max-height: 50px;
+    text-align: center;
+    position: static;
+}
+#gnbNavbarA:hover {
+	opacity: 0.5;
+}
+
+.gnbNavbarA {
+    text-decoration: none; 
+    color: white; 
+    vertical-align: middle; 
+    line-height: 40px;
+    margin: 25px;
+    font-size: small;
+}
+#logoLeaf {
+    color: white; 
+    vertical-align: middle;
+    max-height: 5px; 
+    margin: 20px; 
+    padding-bottom: 5px;
+}
+.dropdown-menu-center {
+    left: 50% !important;
+    right: auto !important;
+    text-align: center !important;
+    transform: translate(-50%, 0) !important;
+}
+#lnNavBar_bg {
+    background-color: black;
+}
+#lnbNavBar {
+    background-color: black; 
+    width: 100%; 
+    line-height: 50px; 
+    text-align: center;
+    animation: animationLnbNavBar 0.5s 1;
+    animation-direction: reverse;
+    position: relative;
+}
+@keyframes animationLnbNavBar {
+    0%   {left: 0px; top: 0px;}
+    100%  {left: 150px; top: 0px;}
+}
+#lnbNavBar ul {
+    margin: 0px; 
+    list-style: none;
+}
+#lnbNavBar li {
+    display: inline-block; 
+    vertical-align: text-top; 
+    padding-right: 60px; 
+    padding-left: 4px;
+}
+#lnbNavBar a {
+    display: block; 
+    position: relative;
+    text-align: center;
+    justify-content: center;
+}
+#lnbNavBar span {
+    color: white; 
+    display: block;
+    line-height: 40px;
+    font-size: small;
+}
+
+#menu_area {
+    width: 160px;
+    height: 400px;
+    float: left;
+    background-color: rgb(230, 230, 230);
+    margin-top: 75px;
+}
+
+#board_ul {
+    margin-left: 15px;
+    padding: 10px;
+}
+
+#board_li {
+    margin-bottom: 10px;
+}
+
+#board_menu_a {
+    color: gray;
+}
+
+#menu_right_bar{
+    width: 3px; 
+    height: 400px; 
+    float: left; 
+    background-color: gray; 
+    margin-left: 15px;
+    margin-top: 75px;
+}
+
+.openBtn {
+  background: #f1f1f1;
+  border: none;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.openBtn:hover {
+  background: #bbb;
+}
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  /* background-color: rgb(0,0,0); */
+  /* background-color: rgba(0,0,0, 1.0); */
+}
+
+.overlay-content {
+  position: relative;
+  top: 46%;
+  width: 80%;
+  text-align: center;
+  margin-top: 30px;
+  margin: auto;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  cursor: pointer;
+  color: white;
+}
+
+.overlay .closebtn:hover {
+  color: #ccc;
+}
+
+.overlay input[type=text] {
+  padding: 15px;
+  font-size: 17px;
+  border: none;
+  float: left;
+  width: 80%;
+  background: white;
+}
+
+.overlay input[type=text]:hover {
+  background: #f1f1f1;
+}
+
+.overlay button {
+  float: left;
+  width: 20%;
+  padding: 15px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.overlay button:hover {
+  background: #bbb;
+}	
+
+#dropdown_menu {
+	position: absolute; 
+	left: 90%; 
+	top: 0%;
+}

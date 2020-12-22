@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/lectureListLayout">
+<head>
+  <meta charset="UTF-8">
+  <title>Insert title here</title>
+</head>
+<body layout:fragment="contentFragment">
+<div id="contents_content" layout:fragment="contentFragment">
+   <div class="content_container" id="content_container">
+       <a id="content_a" href="/ITEdu/lectureRead.do?lectureNo=<%= lectureVO.getLectureNo()%>">
+           <div>
+               <figure>
+                    <img src="/ITEdu/fileFolder/<%=lectureVO.getLectureThumbnail()%>" id="lecure_img"/>
+               </figure>
+           </div>
+           <div id="content_title" th:text="${lecture}"></div>
+           <div class="content_inContents"><%= lectureVO.getLectureTeacher() %> </div>
+           <div class="content_inContents">₩<%= decimalFormat.format(price) %></div>
+       </a>
+   </div>
+   <h3> 강좌가 존재하지 않습니다.</h3>
+</div>
+</body>
+</html>

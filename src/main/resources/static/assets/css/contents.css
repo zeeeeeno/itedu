@@ -1,0 +1,80 @@
+@charset "EUC-KR";
+
+.search-container {
+    width: 100%;
+    height: 70px;
+}
+.search-container input[type=text] {
+    padding: 6px;
+    font-size: 15px;
+    float: right;
+    border: 1px solid gray;
+    margin-top: 25px;
+}
+.search-container button {
+    padding: 6px 10px;
+    background: #ddd;
+    font-size: 17px;
+    border: none;
+    cursor: pointer;
+    float: right;
+    margin-top: 25px;
+    margin-right: 50px;
+}
+.search-container button:hover {
+    background: #ccc;
+}
+#contents_container {
+    padding-left: 120px; 
+    padding-right: 120px;
+}
+
+#contents_title {
+    line-height: 30px;
+}
+
+#contents_content {
+    border: 1px solid #c0c0c0;
+    padding: 1px; 
+    display: inline-flex; 
+    flex-wrap: wrap; 
+    flex-direction: row;
+    margin-bottom: 50px;
+}
+
+.content_container {
+    width: 214px; 
+    height: 330px; 
+    margin: 20px; 
+    flex-wrap: wrap; 
+    flex-direction: row;
+}
+.content_container:hover {
+	background: rgba(122, 122, 122, 0.5);
+}
+
+#content_title {
+	font-size: large; 
+	color: black; 
+	margin: 5px;
+}
+
+.content_teacher {
+	font-size: medium; 
+	color: black; 
+	margin: 5px;
+}
+
+#lecure_img {
+	width: 215px; 
+	height:230px; 
+	margin-bottom: 15px;
+}
+
+#lecure_img:hover {
+	opacity: 0.5;
+}
+
+.content_inContents {
+	margin-left: 5px;
+}
