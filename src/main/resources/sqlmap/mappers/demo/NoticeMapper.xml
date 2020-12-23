@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsitm.career.mapper.NoticeMapper">
+    <select id="selectNotice" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        SELECT * FROM NOTICE
+        WHERE USE_YN = 1
+        ORDER BY NOTICE_NO DESC
+    </select>
+
+    <insert id="savePost">
+        INSERT INTO NOTICE(NOTICE_TITLE, NOTICE_CONTENTS)
+        VALUES(#{PARAM1}, #{PARAM2})
+    </insert>
+
+    <select id="noticeRead" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        SELECT * FROM NOTICE WHERE NOTICE_NO = #{PARAM1}
+    </select>
+
+    <update id="updateNotice">
+        UPDATE NOTICE SET NOTICE_TITLE = #{PARAM2}, NOTICE_CONTENTS = #{PARAM3}
+        WHERE NOTICE_NO = #{PARAM1}
+    </update>
+
+    <update id="deleteNotice">
+        UPDATE NOTICE
+        SET USE_YN = 0
+        WHERE NOTICE_NO = #{PARAM1}
+    </update>
+</mapper>

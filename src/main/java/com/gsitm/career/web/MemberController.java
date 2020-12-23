@@ -1,3 +1,7 @@
+/*
+ * Member Controller
+ * - 회원가입
+ */
 package com.gsitm.career.web;
 
 import java.util.ArrayList;
@@ -25,9 +29,13 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 
+	/*
+	 * 회원 로그인
+	 */
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String memberLogin(@ModelAttribute(name = "memberDTO") MemberDTO memberDTO, HttpServletRequest request) {
 		log.info("MemberController - memberLogin() memberDTO: " + memberDTO.getMember_email());
+
 		String memberEmail = memberDTO.getMember_email();
 		Boolean isLogin = memberService.login(memberDTO);
 		System.out.println("memberEmail: " + memberEmail);
@@ -41,12 +49,16 @@ public class MemberController {
 			HttpSession session = (HttpSession) request.getSession();
 			session.setAttribute("member", member);
 			System.out.println("session.getAttribute(\"member\") - " + session.getAttribute("member"));
+
 			return "redirect:/";
 		} else {
 			return "redirect:/login/signIn";
 		}
 	}
 
+	/*
+	 * 회원가입
+	 */
 	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
 	public String memberSignUp(@ModelAttribute(name = "memberDTO") MemberDTO memberDTO, HttpServletRequest request) {
 		log.info("MemberController - memberSignUp() memberDTO: " + memberDTO.getMember_email());
@@ -55,6 +67,9 @@ public class MemberController {
 		return "forward:/login/signIn";
 	}
 
+	/*
+	 * member list for test
+	 */
 	@RequestMapping(value = "select", method = RequestMethod.GET)
 	public ResponseEntity<ArrayList<MemberDTO>> selectUser() {
 		log.info("MemberController - selectUser()");

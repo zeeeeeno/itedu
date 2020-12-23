@@ -1,3 +1,5 @@
+ // Lecture Data Transfer Object
+
 package com.gsitm.career.dto;
 
 import lombok.Getter;

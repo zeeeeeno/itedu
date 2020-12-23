@@ -7,21 +7,21 @@
 <body layout:fragment="content">
     <div id="createLecture_area">
         <div id="createLecture_input">
-            <form role="form" th:object="${lectureDTO}" th:action="@{/lecture/insert}" method="post" enctype="multipart/form-data">
+            <form role="form" action="/lecture/insert" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                   <div class="form-group col-md-6">
                     <label for="inputEmail4">강의명</label>
-                    <input th:name="lectureTitle" type="text" class="form-control" id="inputEmail4" placeholder="강의 이름">
+                    <input name="lectureTitle" type="text" class="form-control" id="inputEmail4" placeholder="강의 이름">
                   </div>
                   <div class="form-group col-md-6">
                     <label for="inputPassword4">강사명</label>
-                    <input th:name="lectureTeacher" type="text" class="form-control" id="inputPassword4" placeholder="강사명">
+                    <input name="lectureTeacher" type="text" class="form-control" id="inputPassword4" placeholder="강사명">
                   </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputPrice4">강의가격(단위 원)</label>
-                      <input th:name="lecturePrice" type="text" class="form-control" id="inputEmail4" placeholder="ex) 10000">
+                      <input name="lecturePrice" type="text" class="form-control" id="inputEmail4" placeholder="ex) 10000">
                     </div>
                     <div class="form-group col-md-6">
                         <div>
@@ -29,16 +29,16 @@
                         </div>
                         <div style="display: inline-block;">
                             <span style="float: left; margin-right: 20px; padding-top: 5px;">시작일</span>
-                            <input type="date" th:name="lectureStartDate" id="start_date" style="display: flex; margin: 5px; padding: 2px;">
+                            <input type="date" name="lectureStartDate" id="start_date" style="display: flex; margin: 5px; padding: 2px;">
                             <span style="float: left; margin-right: 20px; padding-top: 5px;">종료일</span>
-                            <input type="date" th:name="lectureEndDate" id="end_date" style="display: flex; margin: 5px; padding: 2px;">
+                            <input type="date" name="lectureEndDate" id="end_date" style="display: flex; margin: 5px; padding: 2px;">
                         </div>
                    </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                       <label for="inputState">대분류</label>
-                      <select th:name="lectureCategory1" id="inputState" class="form-control" onchange="categoryChange(this)">
+                      <select name="lectureCategory1" id="inputState" class="form-control" onchange="categoryChange(this)">
                         <option selected>Choose...</option>
                         <option>Programming</option>
                         <option>IT Security</option>
@@ -51,7 +51,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputState">중분류</label>
-                        <select th:name="lectureCategory2"  id="good" class="form-control">
+                        <select name="lectureCategory2"  id="good" class="form-control">
                           <option selected>Choose...</option>
                           <option>대분류를 먼저 선택해주세요</option>
                         </select>
@@ -60,11 +60,11 @@
                 <div class="form-row">
                     <div class="form-group col-md-8">
                       <label for="inputEmail4">강의 소개</label>
-                      <input th:name="lectureContents" style="height: 90px; overflow: scroll;" type="text" class="form-control" id="lecture_introduce" placeholder="강의 소개">
+                      <input name="lectureContents" style="height: 90px; overflow: scroll;" type="text" class="form-control" id="lecture_introduce" placeholder="강의 소개">
                     </div>
                     <div class="form-group col-md-4" id="image_input_area">
                         <label for="inputEmail4">썸네일</label>
-                        <input type="file" th:name="lectureThumbnail" id="profile_pt" onchange="previewImage(this,'View_area')">
+                        <input type="file" name="lectureThumbnail" id="profile_pt" onchange="previewImage(this,'View_area')">
                         <div id='View_area'></div>
                     </div>
                 </div>

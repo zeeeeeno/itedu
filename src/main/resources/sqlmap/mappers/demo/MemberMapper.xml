@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsitm.career.mapper.MemberMapper">
+    <select id="selectUser" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        SELECT * FROM MEMBER
+    </select>
+
+    <insert id="memberInsert">
+        INSERT INTO MEMBER(MEMBER_EMAIL, MEMBER_PW, MEMBER_NAME, MEMBER_POSTNO, MEMBER_ADDR)
+        VALUES(#{PARAM1}, #{PARAM2}, #{PARAM3}, #{PARAM4}, #{PARAM5})
+    </insert>
+
+    <select id="getPassword" resultType="java.lang.String">
+        SELECT MEMBER_PW
+        FROM MEMBER
+        WHERE MEMBER_EMAIL = #{PARAM1}
+    </select>
+
+    <select id="getMemberInfo" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        SELECT *
+        FROM MEMBER
+        WHERE MEMBER_EMAIL = #{PARAM1}
+    </select>
+</mapper>

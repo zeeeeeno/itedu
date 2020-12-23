@@ -3,7 +3,6 @@ package com.gsitm.career.mapper;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 
 import com.gsitm.career.dto.AcademyDTO;

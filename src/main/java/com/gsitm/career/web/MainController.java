@@ -1,3 +1,9 @@
+/*
+ * Main Controller
+ * - 로그인
+ * - 로그아웃
+ * - 화면 전환
+ */
 package com.gsitm.career.web;
 
 import javax.servlet.http.HttpSession;
@@ -21,6 +27,9 @@ public class MainController {
 		return modelAndView;
 	}
 
+	/*
+	 * 회원가입 페이지 이동
+	 */
 	@RequestMapping("/login/signIn")
 	public ModelAndView login(ModelAndView modelAndView) {
 		log.info("MainController - login()");
@@ -29,6 +38,9 @@ public class MainController {
 		return modelAndView;
 	}
 
+	/*
+	 * 로그아웃
+	 */
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String memberLogout(HttpSession session) {
 		log.info("MemberController - memberLogout()");

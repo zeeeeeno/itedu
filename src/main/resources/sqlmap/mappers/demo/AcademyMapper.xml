@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsitm.career.mapper.AcademyMapper">
+    <insert id="signUp">
+        INSERT INTO ACADEMY(ACADEMY_EMAIL, ACADEMY_PW, ACADEMY_NAME) VALUES(#{PARAM1}, #{PARAM2}, #{PARAM3})
+    </insert>
+
+    <select id="getAcademyInfo" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+        SELECT *
+        FROM ACADEMY
+        WHERE ACADEMY_EAMIL = #{PARAM1}
+    </select>
+
+    <select id="getPasswordAcademy" resultType="java.lang.String">
+        SELECT ACADEMY_PW
+        FROM
+        ACADEMY
+        WHERE ACADEMY_EMAIL = #{PARAM1}
+    </select>
+</mapper>

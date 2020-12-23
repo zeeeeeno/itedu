@@ -1,6 +1,4 @@
-/*
- * Member Value Object Class
- */
+// Member Data Transfer Object
 package com.gsitm.career.dto;
 
 import lombok.Setter;
