@@ -2,11 +2,9 @@
 
 package com.gsitm.career.dto;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class LectureDTO {
 	private int lectureNo;
 	private String lectureTitle;

@@ -1,6 +1,3 @@
-/*
- * Academy Service 구현부
- */
 package com.gsitm.career.service;
 
 import java.util.ArrayList;
@@ -14,11 +11,13 @@ import com.gsitm.career.mapper.AcademyMapper;
 
 import lombok.extern.java.Log;
 
+/*
+ * Academy Service 구현부
+ */
 @Log
 @Service
 @Transactional
 public class AcademyServiceImpl implements AcademyService{
-
 	@Autowired
 	AcademyMapper academyMapper;
 

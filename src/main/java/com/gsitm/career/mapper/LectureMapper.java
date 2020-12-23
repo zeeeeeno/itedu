@@ -6,6 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.gsitm.career.dto.LectureDTO;
 
+/**
+ *
+ * @author leejinho
+ *
+ */
 @Mapper
 public interface LectureMapper {
 	ArrayList<LectureDTO> lectureList1(String category1);

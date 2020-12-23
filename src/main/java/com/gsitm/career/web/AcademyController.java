@@ -1,8 +1,3 @@
-/*
- * Academy Controller
- * - 회원가입
- * - 로그인
- */
 package com.gsitm.career.web;
 
 import java.util.ArrayList;
@@ -21,6 +16,11 @@ import com.gsitm.career.service.AcademyService;
 
 import lombok.extern.java.Log;
 
+/*
+ * Academy Controller
+ * - 회원가입
+ * - 로그인
+ */
 @Log
 @Controller
 @RequestMapping("/academy")

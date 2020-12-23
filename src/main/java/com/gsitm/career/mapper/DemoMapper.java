@@ -10,6 +10,11 @@ import com.gsitm.career.dto.LectureDTO;
 import com.gsitm.career.dto.MemberDTO;
 import com.gsitm.career.dto.NoticeDTO;
 
+/**
+ *
+ * @author leejinho
+ *
+ */
 @Component
 @Mapper
 public interface DemoMapper {

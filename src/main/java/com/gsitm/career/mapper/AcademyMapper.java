@@ -6,6 +6,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.gsitm.career.dto.AcademyDTO;
 
+/**
+ *
+ * @author leejinho
+ *
+ */
 @Mapper
 public interface AcademyMapper {
 	void signUp(String id, String pw, String name);
