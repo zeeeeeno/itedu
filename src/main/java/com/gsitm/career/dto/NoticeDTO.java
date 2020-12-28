@@ -1,7 +1,8 @@
-// Notice Data Transfer Object
-
 package com.gsitm.career.dto;
 
+/**
+ * Notice Data Transfer Object
+ */
 import lombok.Data;
 
 @Data

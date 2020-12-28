@@ -1,9 +1,12 @@
- // Lecture Data Transfer Object
-
 package com.gsitm.career.dto;
 
 import lombok.Data;
 
+/**
+ * Lecture Data Transfer Object
+ * @author leejinho
+ *
+ */
 @Data
 public class LectureDTO {
 	private int lectureNo;

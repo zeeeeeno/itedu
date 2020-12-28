@@ -1,8 +1,12 @@
-// Member Data Transfer Object
 package com.gsitm.career.dto;
 
 import lombok.Data;
 
+/**
+ * Member Data Transfer Object
+ * @author leejinho
+ *
+ */
 @Data
 public class MemberDTO {
 	private String memberNo;

@@ -2,6 +2,11 @@ package com.gsitm.career.dto;
 
 import lombok.Data;
 
+/**
+ * Comments Data Transfer Object
+ * @author leejinho
+ *
+ */
 @Data
 public class CommentsDTO {
 	private int commentNoMain;

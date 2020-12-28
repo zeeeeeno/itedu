@@ -2,8 +2,11 @@ package com.gsitm.career.dto;
 
 import lombok.Data;
 
-/*
+
+/**
  * Academy Data Transfer Object
+ * @author leejinho
+ *
  */
 @Data
 public class AcademyDTO {

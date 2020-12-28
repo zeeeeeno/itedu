@@ -6,16 +6,48 @@ import org.apache.ibatis.annotations.Mapper;
 import com.gsitm.career.dto.AcademyDTO;
 
 /**
- *
+ * Call Academy SQL
  * @author leejinho
  *
  */
 @Mapper
 public interface AcademyMapper {
+	/**
+	 * Academy SignUp
+	 * @param id
+	 * @param pw
+	 * @param name
+	 * @throws Exception
+	 */
 	void signUp(String id, String pw, String name) throws Exception;
+
+	/**
+	 * Admin approve academy Sign Up
+	 * @param academyEmail
+	 * @throws Exception
+	 */
 	void academyApprove(String academyEmail) throws Exception;
+
+	/**
+	 * Get Academy Password
+	 * @param email
+	 * @return
+	 * @throws Exception
+	 */
 	String getPasswordAcademy(String email) throws Exception;
+
+	/**
+	 * Get Academy Information
+	 * @param memberEmail
+	 * @return
+	 * @throws Exception
+	 */
 	AcademyDTO getAcademyInfo(String memberEmail) throws Exception;
-	void insertLecture(String title, String teacher, String period, String price, String category1, String category2, String contents, String thumbnail, String id) throws Exception;
+
+	/**
+	 * Print Academy List
+	 * @return
+	 * @throws Exception
+	 */
 	ArrayList<AcademyDTO> academyList() throws Exception;
 }

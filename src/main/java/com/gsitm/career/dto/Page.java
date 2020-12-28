@@ -2,6 +2,11 @@ package com.gsitm.career.dto;
 
 import lombok.Data;
 
+/**
+ * Paging
+ * @author leejinho
+ *
+ */
 @Data
 public class Page {
 		// 현재 페이지 번호

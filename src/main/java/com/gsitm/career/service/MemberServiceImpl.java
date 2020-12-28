@@ -14,6 +14,11 @@ import com.gsitm.career.mapper.MemberMapper;
 
 import lombok.extern.java.Log;
 
+/**
+ * Member Service Implements
+ * @author leejinho
+ *
+ */
 @Log
 @Service
 @Transactional
@@ -21,8 +26,10 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberMapper memberMapper;
 
-	/*
-	 * member list print
+	/**
+	 * 멤버 리스트 출력
+	 * @return
+	 * @throws Exception
 	 */
 	@Override
 	public ArrayList<MemberDTO> selectUser() throws Exception{
@@ -32,10 +39,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 
-	/*
+	/**
 	 * 회원가입
-	 * - parameter
-	 * 	1) memberDTO: 회원정보
+	 * @param memberDTO
+	 * @throws Exception
 	 */
 	@Override
 	public void memberInsert(MemberDTO memberDTO) throws Exception {
@@ -46,11 +53,11 @@ public class MemberServiceImpl implements MemberService {
 		memberMapper.memberInsert(memberDTO.getMemberEmail(), memberDTO.getMemberPasswd(), memberDTO.getMemberName(), memberDTO.getMemberPostNo(), address);
 	}
 
-	/*
+	/**
 	 * 로그인
-	 * - parameter
-	 * 	1) memberDTO: 회원정보
-	 * - return: true/false
+	 * @param memberDTO
+	 * @return
+	 * @throws Exception
 	 */
 	@Override
 	public Boolean login(MemberDTO memberDTO) throws Exception {
@@ -64,10 +71,11 @@ public class MemberServiceImpl implements MemberService {
 			return false;
 	}
 
-	/*
-	 * 패스워드 가져오기
-	 * - parameter
-	 * 	1) email: 회원 아이디
+	/**
+	 * 멤버 정보 가져오기
+	 * @param memberEmail
+	 * @return
+	 * @throws Exception
 	 */
 	public String getPassword(String email) throws Exception {
 		log.info("MemberServiceImpl - getPassword()");
@@ -75,10 +83,11 @@ public class MemberServiceImpl implements MemberService {
 		return memberMapper.getPassword(email);
 	}
 
-	/*
-	 * 회원정보 가져오기
-	 * - parameter
-	 * 	1) email: 회원 아이디
+	/**
+	 * 멤버 정보 가져오기
+	 * @param memberEmail
+	 * @return
+	 * @throws Exception
 	 */
 	@Override
 	public MemberDTO getMemberInfo(String memberEmail) throws Exception {
