@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body th:fragment="lnbFragment">
+    <div style="background-color: white">
+        <div id="lnbNavBar" style="background-color: white">
+            <ul>
+                <li>
+                    <a th:href="@{/lecture/jobBasic/math}">
+                        <i class="fas fa-calculator" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block; margin: 0px auto;"></i>
+                        <span style="color: black;">Math</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/jobBasic/foreignLanguage}">
+                        <i class="fas fa-language" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block;"></i>
+                        <span style="color: black;">Foreign Language</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

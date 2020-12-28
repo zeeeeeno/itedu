@@ -118,12 +118,12 @@
                   <h3>Academy Login</h3>
             </div>
             <div style="margin: 10px">
-                <label for="uname"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" th:name="academy_email" required>
+                <label for="uname"><b>E-Mail</b></label>
+                <input type="text" placeholder="Enter Username" th:name="academyEmail" required>
             </div>
             <div style="margin: 10px">
                 <label for="psw"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" th:name="academy_pw" required>
+                <input type="password" placeholder="Enter Password" th:name="academyPw" required>
             </div>
             <button type="submit" style="color: white; font-weight: bold;">Login</button>
         </div>
@@ -133,29 +133,31 @@
         <div class="form-container-slider sign-up-container-slider" style="overflow: auto;">
             <form th:object="${memberDTO}" th:action="@{/member/signUp}" role="form" class="form-slider" method="post">
                <h3>회원가입</h3>
-               <input class="input" th:name="member_name" id="signUp_userName" type="text" placeholder="이름" />
-               <input class="input" th:name="member_email" id="signUp_userEmail" type="email" placeholder="아메일" />
-               <input class="input" th:name="member_passwd" id="signUp_userPw" type="password" placeholder="비밀번호 - 영문, 숫자 (10~20 자리)" />
-               <input class="input" th:name="passwdCheck" id="signUp_userPwCert" type="password" placeholder="비밀번호 재확인" />
+               <input class="input" th:name="memberName" id="signUp_userName" type="text" placeholder="이름" />
+               <input class="input" th:name="memberEmail" id="signUp_userEmail" type="email" placeholder="아메일" />
+               <input class="input" th:name="memberPasswd" id="signUp_userPw" type="password" placeholder="비밀번호 - 영문, 숫자 (10~20 자리)" />
+               <input class="input" th:name="memberPasswdCheck" id="signUp_userPwCert" type="password" placeholder="비밀번호 재확인" />
                <div style="width: 280px; height: fit-content;">
-                   <input th:name="member_postNo" class="input" type="text" id="sample6_postcode" placeholder="우편번호" style="float: left; max-width: 180px;">
+                   <input th:name="memberPostNo" class="input" type="text" id="sample6_postcode" placeholder="우편번호" style="float: left; max-width: 180px;">
                    <input class="input" type="button" onclick="sample6_execDaumPostcode()" value="검색" style="background-color: grey; border: none; max-width: 70px;">
                </div>
-               <input class="input" th:name="member_address" type="text" id="sample6_address" placeholder="주소">
-               <input class="input" th:name="member_addressDetail" type="text" id="sample6_detailAddress" placeholder="상세주소">
+               <input class="input" th:name="memberAddress" type="text" id="sample6_address" placeholder="주소">
+               <input class="input" th:name="memberAddressDetail" type="text" id="sample6_detailAddress" placeholder="상세주소">
                <button class="button-slider" type="submit">Sign Up</button>
            </form>
         </div>
 
         <!-- 로그인 부분  -->
         <div class="form-container-slider sign-in-container-slider">
-            <form th:object="${memberDTO}" th:action="@{/member/login}" class="form-slider" method="post">
+            <form th:object="${memberDTO}" th:action="@{/member/login}" class="form-slider" method="get">
                 <h1 style="font-weight: bold">Login</h1>
-                <input autocomplete="off" class="input" id="signIn_userEmail" th:name="member_email" type="email" placeholder="Email" onclick="document.getElementById('signIn_userPw').style.display = 'inline';"/>
-                <input class="input" id="signIn_userPw" th:name="member_passwd" type="password" placeholder="Password" style="display: none;"/>
+                <input autocomplete="off" class="input" id="signIn_userEmail" th:name="memberEmail" type="email" placeholder="Email" onclick="document.getElementById('signIn_userPw').style.display = 'inline';"/>
+                <input onkeypress="caps_lock(event)" class="input" id="signIn_userPw" th:name="memberPasswd" type="password" placeholder="Password" style="display: none;"/>
                 <br>
+                <p class="mg-t-0 mg-b-0" id="capslock" style="width:300px; bottom:0px; display:none">
+                    <b>CapsLock</b> 키가 눌려있습니다.
+                </p>
                 <!-- <a class="a">Forgot your password?</a> -->
-                <!-- Login Input 값 공백 시 -->
                 <button class="button-slider" type="submit">Sign In</button>
             </form>
         </div>
@@ -180,6 +182,28 @@
     </div>
 </body>
 <script>
+function caps_lock(e) {
+        var keyCode = 0;
+        var shiftKey = false;
+        keyCode = e.keyCode;
+        shiftKey = e.shiftKey;
+        if (((keyCode >= 65 && keyCode <= 90) && !shiftKey)
+                || ((keyCode >= 97 && keyCode <= 122) && shiftKey)) {
+            show_caps_lock();
+            setTimeout("hide_caps_lock()", 3500);
+        } else {
+            hide_caps_lock();
+        }
+    }
+
+function show_caps_lock() {
+     $("#capslock").show();
+}
+
+function hide_caps_lock() {
+     $("#capslock").hide();
+}
+
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {

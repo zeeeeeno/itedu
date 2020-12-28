@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/lectureListLayout">
+<body layout:fragment="content">
+    <div th:replace="navigation/lnbITSecurity :: lnbFragment"></div>
+    <div th:replace="lecture/lectureContent :: contentFragment"></div>
+</body>
+</html>

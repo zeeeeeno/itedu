@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gsitm.career.mapper.LectureMapper">
-    <select id="lectureList1" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
-        SELECT LECTURE_NO, LECTURE_NAME, LECTURE_TEACHER, LECTRUE_PERIOD, LECTURE_PRICE, LECTURE_CATEGORY_MAINCATEGORY, LECTURE_CATEGORY_SUBCATEGORY, LECTURE_CONTENTS, LECTURE_THUMBNAIL, LECTURE_CREDATE, LECTURE_ACADEMY
-        FROM LECTURE
+    <select id="lectureListAll" resultType="LectureDTO">
+        SELECT *
+        FROM lecture
+    </select>
+
+    <select id="lectureList1" resultType="LectureDTO">
+        SELECT LECTURE_NO, LECTURE_NAME, LECTURE_TEACHER, lecture_period, LECTURE_PRICE, LECTURE_CATEGORY_MAINCATEGORY, LECTURE_CATEGORY_SUBCATEGORY, LECTURE_CONTENTS, LECTURE_THUMBNAIL, LECTURE_CREDATE, LECTURE_ACADEMY
+        FROM lecture
         WHERE LECTURE_CATEGORY_MAINCATEGORY = #{PARAM1}
     </select>
 
-    <select id="lectureList2" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
-        SELECT LECTURE_NO, LECTURE_NAME, LECTURE_TEACHER, LECTRUE_PERIOD, LECTURE_PRICE, LECTURE_CATEGORY_MAINCATEGORY, LECTURE_CATEGORY_SUBCATEGORY, LECTURE_CONTENTS, LECTURE_THUMBNAIL, LECTURE_CREDATE, LECTURE_ACADEMY
-        FROM LECTURE
-        WHERE LECTURE_CATEGORY_MAINCATEGORY = #{PARAM1} AND LECTURE_CATEGORY_SUBCATEGORY = #{PARAM2}
+    <select id="lectureList2" resultType="LectureDTO">
+        SELECT LECTURE_NO, LECTURE_NAME, LECTURE_TEACHER, lecture_period, LECTURE_PRICE, LECTURE_CATEGORY_MAINCATEGORY, LECTURE_CATEGORY_SUBCATEGORY, LECTURE_CONTENTS, LECTURE_THUMBNAIL, LECTURE_CREDATE, LECTURE_ACADEMY
+        FROM lecture
+        WHERE LECTURE_CATEGORY_MAINCATEGORY = #{category1} AND LECTURE_CATEGORY_SUBCATEGORY = #{category2}
     </select>
 
-    <insert id="insertLecture">
-        INSERT INTO LECTURE(LECTURE_NAME, LECTURE_TEACHER, LECTURE_PERIOD, LECTURE_PRICE, LECTURE_CATEGORY_MAINCATEGORY, LECTURE_CATEGORY_SUBCATEGORY, LECTURE_CONTENTS, LECTURE_THUMBNAIL)
-        VALUES(#{PARAM1}, #{PARAM2}, #{PARAM3}, #{PARAM4}, #{PARAM5}, #{PARAM6}, #{PARAM7}, #{PARAM8}, #{PARAM9})
+    <insert id="insertLecture" parameterType="com.gsitm.career.dto.LectureDTO">
+        INSERT INTO lecture(LECTURE_NAME, LECTURE_TEACHER, lecture_period, LECTURE_PRICE, LECTURE_CATEGORY_MAINCATEGORY, LECTURE_CATEGORY_SUBCATEGORY, LECTURE_CONTENTS, LECTURE_THUMBNAIL, lecture_academy)
+        VALUES(#{lectureName}, #{lectureTeacher}, #{lecturePeriod}, #{lecturePrice}, #{lectureCategoryMainCategory}, #{lectureCategorySubCategory}, #{lectureContents}, #{lectureThumbnail}, #{lectureAcaedmy})
     </insert>
+
+    <select id="lectureDetail" resultType="LectureDTO">
+        SELECT LECTURE_NO, LECTURE_NAME, LECTURE_TEACHER, lecture_period, LECTURE_PRICE, LECTURE_CATEGORY_MAINCATEGORY, LECTURE_CATEGORY_SUBCATEGORY, LECTURE_CONTENTS, LECTURE_THUMBNAIL, LECTURE_CREDATE, LECTURE_ACADEMY
+        FROM lecture
+        WHERE LECTURE_NO = #{PARAM1}
+    </select>
+
+    <select id="lectureCount" resultType="int">
+        SELECT COUNT(LECTURE_NO)
+        FROM lecture
+    </select>
 </mapper>

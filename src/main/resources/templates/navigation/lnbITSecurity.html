@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body th:fragment="lnbFragment">
+    <div id="lnNavBar_bg" style="background-color: white">
+        <div id="lnbNavBar" style="background-color: white">
+            <ul>
+                <li>
+                    <a th:href="@{/lecture/itSecurity/security}">
+                        <i class="fas fa-shield-alt" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block; margin: 0px auto;"></i>
+                        <span style="color: black;">Security</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/itSecurity/Automation}">
+                        <i class="fas fa-cogs" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block;"></i>
+                        <span style="color: black;">Automation</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/itSecurity/Infra}">
+                        <i class="fas fa-building" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block;"></i>
+                        <span style="color: black;">Infra</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/itSecurity/IoT}">
+                        <i class="fas fa-project-diagram" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block;"></i>
+                        <span style="color: black;">IoT</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/itSecurity/Blockchain}">
+                        <i class="fas fa-th-large" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block;"></i>
+                        <span style="color: black;">Blockchain</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

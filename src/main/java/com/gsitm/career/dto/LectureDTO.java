@@ -7,15 +7,16 @@ import lombok.Data;
 @Data
 public class LectureDTO {
 	private int lectureNo;
-	private String lectureTitle;
+	private String lectureName;
 	private String lectureTeacher;
 	private String lecturePrice;
+	private String lecturePeriod;
 	private String lectureStartDate;
 	private String lectureEndDate;
-	private String lectureCategory1;
-	private String lectureCategory2;
+	private String lectureCategoryMainCategory;
+	private String lectureCategorySubCategory;
 	private String lectureContents;
 	private String lectureThumbnail;
-	private String lecture_creDate;
-	private String lecture_acaedmy;
+	private String lectureCreDate;
+	private String lectureAcaedmy;
 }

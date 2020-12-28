@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body th:fragment="lnbFragment">
+    <div style="background-color: black">
+        <div id="lnbNavBar">
+            <ul>
+                <li>
+                    <a th:href="@{/lecture/career/Employment}">
+                        <i class="fas fa-user-md" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block; margin: 0px auto;"></i>
+                        <span>Employment</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/career/Branding}">
+                        <i class="fab fa-apple" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block;"></i>
+                        <span>Branding</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/career/Founded}">
+                        <i class="fab fa-envira" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block;"></i>
+                        <span>Founded</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

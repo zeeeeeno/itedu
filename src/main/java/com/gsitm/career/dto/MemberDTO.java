@@ -5,12 +5,13 @@ import lombok.Data;
 
 @Data
 public class MemberDTO {
-	private String member_no;
-	private String member_email;
-	private String member_passwd;
-	private String member_name;
-	private String member_postNo;
-	private String member_address;
-	private String member_addressDetail;
-	private String member_auth;
+	private String memberNo;
+	private String memberEmail;
+	private String memberPasswd;
+	private String memberPasswdCheck;
+	private String memberName;
+	private String memberPostNo;
+	private String memberAddress;
+	private String memberAddressDetail;
+	private String memberAuth;
 }

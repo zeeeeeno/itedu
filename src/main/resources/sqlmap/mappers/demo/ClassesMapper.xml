@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gsitm.career.mapper.ClassesMapper">
+    <select id="isListenClasses" resultType="int">
+        SELECT count(lecture_no)
+        FROM classes
+        WHERE lecture_no = #{lectureNo} AND user_email = #{memberEmail}
+    </select>
+
+    <insert id="apply">
+        INSERT INTO classes(lecture_no, user_email)
+        VALUES(#{lectureNo}, #{memberEmail})
+    </insert>
+</mapper>

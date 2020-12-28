@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body th:fragment="lnbFragment">
+    <div style="background-color: black">
+        <div id="lnbNavBar">
+            <ul>
+                <li>
+                    <a th:href="@{/lecture/workSkill/Office}">
+                        <i class="fas fa-briefcase" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block; margin: 0px auto;"></i>
+                        <span>Office</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/workSkill/Plan}">
+                        <i class="fas fa-clipboard" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block;"></i>
+                        <span>Plan</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/workSkill/Marketing}">
+                        <i class="fas fa-bullhorn" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block;"></i>
+                        <span>Marketing</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/workSkill/Finance}">
+                        <i class="fas fa-money-bill-alt" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block;"></i>
+                        <span>Finance</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

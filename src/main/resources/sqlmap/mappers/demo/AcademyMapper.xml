@@ -2,19 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gsitm.career.mapper.AcademyMapper">
     <insert id="signUp">
-        INSERT INTO ACADEMY(ACADEMY_EMAIL, ACADEMY_PW, ACADEMY_NAME) VALUES(#{PARAM1}, #{PARAM2}, #{PARAM3})
+        INSERT INTO academy(academy_email, ACADEMY_PW, ACADEMY_NAME) VALUES(#{PARAM1}, #{PARAM2}, #{PARAM3})
     </insert>
 
-    <select id="getAcademyInfo" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
+    <select id="getAcademyInfo" resultType="AcademyDTO">
         SELECT *
-        FROM ACADEMY
-        WHERE ACADEMY_EAMIL = #{PARAM1}
+        FROM academy
+        WHERE academy_email = #{PARAM1}
     </select>
 
     <select id="getPasswordAcademy" resultType="java.lang.String">
         SELECT ACADEMY_PW
-        FROM
-        ACADEMY
-        WHERE ACADEMY_EMAIL = #{PARAM1}
+        FROM academy
+        WHERE academy_email = #{PARAM1}
     </select>
+
+    <select id="academyList" resultType="AcademyDTO">
+        SELECT *
+        FROM academy
+    </select>
+
+    <update id="academyApprove">
+        UPDATE academy
+        SET academy_useYN = 1
+        WHERE academy_email = #{PARAM1}
+    </update>
 </mapper>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body th:fragment="lnbFragment">
+    <div style="background-color: black">
+        <div id="lnbNavBar">
+            <ul>
+                <li>
+                    <a th:href="@{/lecture/dataScience/dataAnalysis}">
+                        <i class="fas fa-chart-line" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block; margin: 0px auto;"></i>
+                        <span>Data Analysis</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/dataScience/AI}">
+                        <i class="fas fa-robot" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block;"></i>
+                        <span>AI</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/dataScience/database}">
+                        <i class="fas fa-database" aria-hidden="true" style="margin: 0 auto; color:#ffffff; font-size:40px; display: block;"></i>
+                        <span>Database</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

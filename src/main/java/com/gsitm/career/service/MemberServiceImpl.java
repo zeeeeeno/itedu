@@ -25,9 +25,8 @@ public class MemberServiceImpl implements MemberService {
 	 * member list print
 	 */
 	@Override
-	public ArrayList<MemberDTO> selectUser() {
+	public ArrayList<MemberDTO> selectUser() throws Exception{
 		log.info("MemberServiceImpl - selectUser()");
-		log.info(memberMapper.selectUser().toString());
 
 		return memberMapper.selectUser();
 	}
@@ -39,12 +38,12 @@ public class MemberServiceImpl implements MemberService {
 	 * 	1) memberDTO: 회원정보
 	 */
 	@Override
-	public void memberInsert(MemberDTO memberDTO) {
+	public void memberInsert(MemberDTO memberDTO) throws Exception {
 		// TODO Auto-generated method stub
 		log.info("MemberServiceImpl - memberInsert()");
-		String address = memberDTO.getMember_address() + " " + memberDTO.getMember_addressDetail();
+		String address = memberDTO.getMemberAddress() + " " + memberDTO.getMemberAddressDetail();
 
-		memberMapper.memberInsert(memberDTO.getMember_email(), memberDTO.getMember_passwd(), memberDTO.getMember_name(), memberDTO.getMember_postNo(), address);
+		memberMapper.memberInsert(memberDTO.getMemberEmail(), memberDTO.getMemberPasswd(), memberDTO.getMemberName(), memberDTO.getMemberPostNo(), address);
 	}
 
 	/*
@@ -54,12 +53,12 @@ public class MemberServiceImpl implements MemberService {
 	 * - return: true/false
 	 */
 	@Override
-	public Boolean login(MemberDTO memberDTO) {
+	public Boolean login(MemberDTO memberDTO) throws Exception {
 		// TODO Auto-generated method stub
-		log.info("MemberServiceImpl - login()");
-		String email = memberDTO.getMember_email();
+		log.info("MemberServiceImpl - login() memberDTO: " + memberDTO);
+		String email = memberDTO.getMemberEmail();
 		String dbPW = getPassword(email);
-		if (dbPW.equals(memberDTO.getMember_passwd())) {
+		if (dbPW.equals(memberDTO.getMemberPasswd())) {
 			return true;
 		} else
 			return false;
@@ -70,8 +69,8 @@ public class MemberServiceImpl implements MemberService {
 	 * - parameter
 	 * 	1) email: 회원 아이디
 	 */
-	public String getPassword(String email) {
-		log.info("MemberServiceImpl - login()");
+	public String getPassword(String email) throws Exception {
+		log.info("MemberServiceImpl - getPassword()");
 
 		return memberMapper.getPassword(email);
 	}
@@ -82,10 +81,9 @@ public class MemberServiceImpl implements MemberService {
 	 * 	1) email: 회원 아이디
 	 */
 	@Override
-	public ArrayList<MemberDTO> getMemberInfo(String memberEmail) {
+	public MemberDTO getMemberInfo(String memberEmail) throws Exception {
 		// TODO Auto-generated method stub
 		log.info("MemberServiceImpl - getMemberInfo() - memberEmail: " + memberEmail);
-
 
 		return memberMapper.getMemberInfo(memberEmail);
 	}

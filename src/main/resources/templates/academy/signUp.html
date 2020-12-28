@@ -14,19 +14,19 @@
                 <form role="form" th:object="${academyDTO}" th:action="@{/academy/signUp}" method="post">
                     <div style="margin: 10px;">
                         <label style="font-size: small;">학원 이메일</label><br>
-                        <input th:name="academy_email" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" style="width: 400px; height: 40px;">
+                        <input th:name="academyEmail" type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com" style="width: 400px; height: 40px;">
                     </div>
                     <div style="margin: 10px;">
                         <label style="font-size: small;">비밀번호</label><br>
-                        <input th:name="academy_pw" type="password" class="form-control" id="exampleFormControlInput1" placeholder="비밀번호를 입력하세요." style="width: 400px; height: 40px;">
+                        <input th:name="academyPw" type="password" class="form-control" id="exampleFormControlInput1" placeholder="비밀번호를 입력하세요." style="width: 400px; height: 40px;">
                     </div>
                     <div style="margin: 10px;">
                         <label style="font-size: small;">비밀번호 확인</label><br>
-                        <input name="academy_pw_check" type="password" class="form-control" id="exampleFormControlInput1" placeholder="비밀번호를 입력하세요." style="width: 400px; height: 40px;">
+                        <input name="academyPwCheck" type="password" class="form-control" id="exampleFormControlInput1" placeholder="비밀번호를 입력하세요." style="width: 400px; height: 40px;">
                     </div>
                     <div style="margin: 10px;">
                         <label style="font-size: small;">학원 이름</label><br>
-                        <input th:name="academy_name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="학원 이름을 입력하세요." style="width: 400px; height: 40px;">
+                        <input th:name="academyName" type="text" class="form-control" id="exampleFormControlInput1" placeholder="학원 이름을 입력하세요." style="width: 400px; height: 40px;">
                     </div>
                     <div style="margin-left: 150px; margin-top: 20px;">
                         <button type="submit" style="border: none; border-radius: 3vh; font-size: medium; height: 40px; width: 90px; background-color: rgb(43, 43, 43); color: white;">등록</button>

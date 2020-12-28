@@ -14,12 +14,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gsitm.career.dto.NoticeDTO;
+import com.gsitm.career.dto.Page;
 import com.gsitm.career.service.NoticeService;
 
 import lombok.extern.java.Log;
@@ -35,12 +37,23 @@ public class NoticeController {
 	/*
 	 * 공지사항 출력
 	 */
-	@RequestMapping("/")
-	public String notice(Model model) {
+	@GetMapping("/list")
+	public String notice(Model model, HttpServletRequest request) throws Exception {
 		log.info("NoticeController - notice()");
 
-		ArrayList<NoticeDTO> arrayList = noticeService.noticeList();
+		int num = Integer.parseInt(request.getParameter("num"));
+
+		Page page = new Page();
+		page.setNum(num);
+		int noticeSize = noticeService.noticeCount();
+		log.info("noticeSize: " + noticeSize);
+		page.setCount(noticeSize);
+
+		ArrayList<NoticeDTO> arrayList = noticeService.noticeList(page.getDisplayPost(), page.getPostNum());
 		model.addAttribute("notice", arrayList);
+		model.addAttribute("select", num);
+		model.addAttribute("page", page);
+		model.addAttribute("noticeSize", noticeSize);
 
 		return "notice/noticeList";
 	}
@@ -48,7 +61,7 @@ public class NoticeController {
 	/*
 	 * 공지사항 작성 페이지로 이동
 	 */
-	@RequestMapping("/create")
+	@GetMapping("/create")
 	public String noticeCreate(Model model) {
 		log.info("NoticeController - noticeCreate()");
 
@@ -58,8 +71,8 @@ public class NoticeController {
 	/*
 	 * 공지사항 입력
 	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String noticeinsert(@ModelAttribute(name = "noticeDTO") NoticeDTO noticeDTO, HttpServletRequest request) {
+	@PostMapping("/insert")
+	public String noticeinsert(@ModelAttribute(name = "noticeDTO") NoticeDTO noticeDTO, HttpServletRequest request) throws Exception {
 		log.info("NoticeController - noticeinsert() noticeDTO: " + noticeDTO);
 
 		noticeService.savePost(noticeDTO);
@@ -70,9 +83,11 @@ public class NoticeController {
 	/*
 	 * 공지사항 상세 내용 출력
 	 */
-	@RequestMapping(value = "/detail/{noticeNo}", method = RequestMethod.GET)
-	public String noticeDetail(@PathVariable("noticeNo") Long noticeNo, HttpServletRequest request, Model model) {
+	@GetMapping("/detail/{noticeNo}")
+	public String noticeDetail(@PathVariable("noticeNo") Long noticeNo, HttpServletRequest request, Model model) throws Exception {
 		log.info("NoticeController - noticeDetail() noticeNo: " + noticeNo);
+
+		noticeService.countViews(noticeNo);
 
 		ArrayList<NoticeDTO> notice = noticeService.noticeDetail(noticeNo);
 		model.addAttribute("notice", notice);
@@ -83,8 +98,8 @@ public class NoticeController {
 	/*
 	 * 공자사항 수정 페이지 이동
 	 */
-	@RequestMapping(value = "/update/{noticeNo}", method = RequestMethod.GET)
-	public String noticeUpdate(@PathVariable("noticeNo") Long noticeNo, HttpServletRequest request, Model model) {
+	@GetMapping("/update/{noticeNo}")
+	public String noticeUpdate(@PathVariable("noticeNo") Long noticeNo, HttpServletRequest request, Model model) throws Exception {
 		log.info("NoticeController - noticeDetail() noticeNo: " + noticeNo);
 
 		ArrayList<NoticeDTO> notice = noticeService.noticeDetail(noticeNo);
@@ -96,8 +111,8 @@ public class NoticeController {
 	/*
 	 * 공지사항 수정
 	 */
-	@RequestMapping(value = "/update/{noticeNo}", method = RequestMethod.POST)
-	public String noticeModify(@PathVariable("noticeNo") Long noticeNo, @ModelAttribute(name = "modifyDTO") NoticeDTO modifyDTO, HttpServletRequest request) {
+	@PostMapping("/update/{noticeNo}")
+	public String noticeModify(@PathVariable("noticeNo") Long noticeNo, @ModelAttribute(name = "modifyDTO") NoticeDTO modifyDTO, HttpServletRequest request) throws Exception {
 		log.info("NoticeController - noticeinsert() noticeDTO: " + modifyDTO);
 
 		noticeService.updateNotice(noticeNo, modifyDTO.getNoticeTitle(), modifyDTO.getNoticeContents());
@@ -107,8 +122,8 @@ public class NoticeController {
 		return redirect;
 	}
 
-	@RequestMapping(value = "/delete/{noticeNo}", method = RequestMethod.GET)
-	public String noticeDelete(@PathVariable("noticeNo") Long noticeNo, HttpServletRequest request) {
+	@GetMapping("/delete/{noticeNo}")
+	public String noticeDelete(@PathVariable("noticeNo") Long noticeNo, HttpServletRequest request) throws Exception {
 		log.info("NoticeController - noticeDelete() noticeNo: " + noticeNo);
 
 		noticeService.deleteNotice(noticeNo);

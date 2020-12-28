@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<body th:fragment="lnbFragment">
+    <div style="background-color: white">
+        <div id="lnbNavBar" style="background-color: white">
+            <ul>
+                <li>
+                    <a th:href="@{/lecture/creative/3D Modeling}">
+                        <i class="fas fa-cubes" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block; margin: 0px auto;"></i>
+                        <span style="color: black;">3Dmodeling</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/creative/webAppdesign}">
+                        <i class="far fa-edit" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block;"></i>
+                        <span style="color: black;">Web/App Design</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/creative/uxUi}">
+                        <i class="fas fa-desktop" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block;"></i>
+                        <span style="color: black;">UX/UI</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/lecture/creative/vrAr}">
+                        <i class="fas fa-glasses" aria-hidden="true" style="margin: 0 auto; color:black; font-size:40px; display: block;"></i>
+                        <span style="color: black;">VR/AR</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

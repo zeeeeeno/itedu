@@ -22,12 +22,12 @@
             <i class="far fa-moon" aria-hidden="true" style="color: #ffffff; font-size: 20px; vertical-align: middle;"></i>
         </a>
         <a th:href="@{/lecture/Programming}" class="gnbNavbarA">Programming</a>
-        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=ITSecurity" class="gnbNavbarA">IT Security</a>
-        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=DataScience" class="gnbNavbarA">Data Science</a>
-        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=Creative" class="gnbNavbarA">Creative</a>
-        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=WorkSkill" class="gnbNavbarA">Work Skill</a>
-        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=JobBasic" class="gnbNavbarA">Job Basic</a>
-        <a th:href="@{/lecture/Programming}" href="/ITEdu/lectureList.do?category=Career" class="gnbNavbarA">Career</a>
+        <a th:href="@{/lecture/ITSecurity}" class="gnbNavbarA">IT Security</a>
+        <a th:href="@{/lecture/DataScience}" class="gnbNavbarA">Data Science</a>
+        <a th:href="@{/lecture/Creative}" class="gnbNavbarA">Creative</a>
+        <a th:href="@{/lecture/WorkSkill}" class="gnbNavbarA">Work Skill</a>
+        <a th:href="@{/lecture/JobBasic}" class="gnbNavbarA">Job Basic</a>
+        <a th:href="@{/lecture/Career}" class="gnbNavbarA">Career</a>
         <a class="gnbNavbarA" id="gnbNavbarA"> <!-- onclick="openSearch()" / spring boot 활용 시 구현  -->
             <i class="fas fa-search" aria-hidden="true" style="color: #ffffff; font-size: 20px; vertical-align: middle;"></i>
         </a>
@@ -58,13 +58,14 @@
                 <li><a href="/ITEdu/noticeList.do?num=1">Notice</a></li>
                 <li><a href="/ITEdu/views/SliderLogin/Logout.jsp">Logout</a></li> -->
 
-                <li th:if="${session['member']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['member'][0].memberName}"></a></li>
-                <li th:if="${session['academy']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['academy'][0].academyName}"></a></li>
-                <li th:if="${session['academy']}"><a href="/lecture/upload">UpLoad</a></li>
+                <li th:if="${session['member']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['member'].memberName}"></a></li>
+                <li th:if="${session['academy']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['academy'].academyName}"></a></li>
+                <li th:if="${session['academy']}"><a th:href="@{/lecture/upload}">UpLoad</a></li>
+                <li th:if="${session['member']}"><a th:href="@{/admin}">Manage</a></li>
                 <li th:if="${session['member']} == null and ${session['academy']} == null"><a href="/login/signIn">Sign In</a></li>
                 <li th:if="${session['member']} == null and ${session['academy']} == null"><a href="/academy/">Contact Us</a></li>
                 <li class="divider"></li>
-                <li><a href="/notice/">Notice</a></li>
+                <li><a href="/notice/list?num=1">Notice</a></li>
                 <li th:if="${session['member']} or ${session['academy']}"><a href="/logout">Logout</a></li>
             </ul>
         </div>

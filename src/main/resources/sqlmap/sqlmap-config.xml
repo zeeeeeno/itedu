@@ -11,6 +11,12 @@
 
     <typeAliases>
         <typeAlias alias="CamelCaseMap" type="com.gsitm.career.mybatis.type.CamelCaseMap"/>
+        <typeAlias alias="LectureDTO" type="com.gsitm.career.dto.LectureDTO"/>
+        <typeAlias alias="AcademyDTO" type="com.gsitm.career.dto.AcademyDTO"/>
+        <typeAlias alias="MemberDTO" type="com.gsitm.career.dto.MemberDTO"/>
+        <typeAlias alias="NoticeDTO" type="com.gsitm.career.dto.NoticeDTO"/>
+        <typeAlias alias="CommentsDTO" type="com.gsitm.career.dto.CommentsDTO"/>
+        <typeAlias alias="ClassesDTO" type="com.gsitm.career.dto.ClassesDTO"/>
     </typeAliases>
 
     <typeHandlers>

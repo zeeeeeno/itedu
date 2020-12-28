@@ -7,11 +7,11 @@
   <body layout:fragment="content">
   <div id="notice_area" style="width: 100%; height: 537px;">
         <div style="width: 75%; height: 90%; background-color: white; margin: 0px auto;">
-            <div style="width: 100%; height: 70px;">
+            <div class="mg-b-10" style="width: 100%; height: 100px;">
                 <h1 style="font-weight: bold;">공지사항</h1>
             </div>
-            <div style="width: 100%; height: 50px;">
-                <p style="float: left; margin-right: 560px;">총게시물: <strong th:text="${notice.size()}"></strong></p>
+            <div style="width: 100%;">
+                <p class="mg-t-30 mg-b-10" style="float: left; margin-right: 560px;">총게시물: <strong th:text="${noticeSize}"></strong></p>
                 <div>
                     <form action="/ITEdu/noticeSearch.do" method="post">
                         <select name="category" style="height: 25px;">
@@ -35,32 +35,43 @@
                         </tr>
                     </thead>
                     <tbody>
-                            <tr th:if="${notice.size()} > 0" th:each="board : ${notice}" style="text-align: center; height: 40px">
-                                <td style="width: 10%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.noticeNo}"></td>
-                                <td style="width: 40%; text-align: left; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold; padding-left: 15px">
-                                    <a th:href="@{/notice/detail/{noticeNo}(noticeNo = ${board.noticeNo})}" th:text="${board.noticeTitle}"></a>
-                                </td>
-                                <td style="width: 20%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.noticeWriter}"></td>
-                                <td style="width: 20%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.createTime}"></td>
-                                <td style="width: 10%; text-align: center; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.noticeClicknum}"></td>
-                            </tr>
-                            <tr th:if="${notice.size()} <= 0">
-                                <td colspan="5">게시물이 없습니다.</td>
-                            </tr>
+                        <tr th:if="${notice.size()} > 0" th:each="board : ${notice}" style="text-align: center; height: 40px">
+                            <td style="width: 10%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.noticeNo}"></td>
+                            <td style="width: 40%; text-align: left; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold; padding-left: 15px">
+                                <a th:href="@{/notice/detail/{noticeNo}(noticeNo = ${board.noticeNo})}" th:text="${board.noticeTitle}"></a>
+                            </td>
+                            <td style="width: 20%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.noticeWriter}"></td>
+                            <td style="width: 20%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.createTime}"></td>
+                            <td style="width: 10%; text-align: center; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.noticeClicknum}"></td>
+                        </tr>
+                        <tr th:if="${notice.size()} <= 0">
+                            <td colspan="5">게시물이 없습니다.</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-            <div>
-              <ul class="pagination justify-content-center">
-                <li class="page-item disabled"><a class="page-link page-link-icon" href="#"><i data-feather="chevron-left"></i></a></li>
-                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item"><a class="page-link page-link-icon" href="#"><i data-feather="chevron-right"></i></a></li>
-              </ul>
-            </div>
+            <div style="text-align: center; width: fit-content; height: 30px; margin: 0px auto;"
+                    th:with="start=${page.startPageNum}, end=${page.endPageNum}">
+               <ul>
+                   <li th:if="${page.prev}" style="list-style-type: none; float: left; margin: 5px;">
+                       <a th:text="'<<'"></a>
+                   </li>
+
+                   <li th:if="${start > 1}" style="list-style-type: none; float: left;">
+                       <a th:text="'<'"></a>
+                   </li>
+
+                   <li th:each="page: ${#numbers.sequence(start, end-1)}" style="list-style-type: none; float: left; margin: 5px;">
+                       <a th:href="|@{/notice/list?num={page} (page = ${page})}|" th:text="${page}"></a>
+                   </li>
+
+                   <li th:if="${end} == ${page.next}" style="list-style-type: none; float: left; margin: 5px;">
+                       <a th:href="|@{/notice/list?num={page} (page = ${page.endPageNum}+1)}|" th:text="'>'"></a>
+                   </li>
+               </ul>
+           </div>
             <div style="width: 100%; height: 70px;">
-              <a href="/notice/create" style="float: right;">Create New Register</a>
+              <a th:if="${member} != null and ${member.memberAuth} == admin" href="/notice/create" style="float: right;">Create New Register</a>
             </div>
         </div>
     </div>

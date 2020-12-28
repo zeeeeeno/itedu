@@ -12,9 +12,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.gsitm.career.dto.MemberDTO;
 import com.gsitm.career.service.MemberService;
@@ -32,23 +33,18 @@ public class MemberController {
 	/*
 	 * 회원 로그인
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String memberLogin(@ModelAttribute(name = "memberDTO") MemberDTO memberDTO, HttpServletRequest request) {
-		log.info("MemberController - memberLogin() memberDTO: " + memberDTO.getMember_email());
+	@GetMapping("/login")
+	public String memberLogin(@ModelAttribute(name = "memberDTO") MemberDTO memberDTO, HttpServletRequest request) throws Exception {
+		log.info("MemberController - memberLogin() memberDTO: " + memberDTO.getMemberEmail());
 
-		String memberEmail = memberDTO.getMember_email();
+		String memberEmail = memberDTO.getMemberEmail();
 		Boolean isLogin = memberService.login(memberDTO);
-		System.out.println("memberEmail: " + memberEmail);
 
 		if (isLogin) {
-			log.info("로그인 성공");
-
-			ArrayList<MemberDTO> member = memberService.getMemberInfo(memberEmail);
-			System.out.println("member: " + member);
-
+			MemberDTO member = memberService.getMemberInfo(memberEmail);
 			HttpSession session = (HttpSession) request.getSession();
+
 			session.setAttribute("member", member);
-			System.out.println("session.getAttribute(\"member\") - " + session.getAttribute("member"));
 
 			return "redirect:/";
 		} else {
@@ -59,19 +55,19 @@ public class MemberController {
 	/*
 	 * 회원가입
 	 */
-	@RequestMapping(value = "/signUp", method = RequestMethod.POST)
-	public String memberSignUp(@ModelAttribute(name = "memberDTO") MemberDTO memberDTO, HttpServletRequest request) {
-		log.info("MemberController - memberSignUp() memberDTO: " + memberDTO.getMember_email());
+	@PostMapping("/signUp")
+	public String memberSignUp(@ModelAttribute(name = "memberDTO") MemberDTO memberDTO, HttpServletRequest request) throws Exception {
+		log.info("MemberController - memberSignUp() memberDTO: " + memberDTO.getMemberEmail());
 		memberService.memberInsert(memberDTO);
 
-		return "forward:/login/signIn";
+		return "redirect:/login/signIn";
 	}
 
 	/*
 	 * member list for test
 	 */
-	@RequestMapping(value = "select", method = RequestMethod.GET)
-	public ResponseEntity<ArrayList<MemberDTO>> selectUser() {
+	@GetMapping("select")
+	public ResponseEntity<ArrayList<MemberDTO>> selectUser() throws Exception {
 		log.info("MemberController - selectUser()");
 		return ResponseEntity.ok(memberService.selectUser());
 	}

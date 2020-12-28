@@ -14,15 +14,19 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.gsitm.career.dto.AcademyDTO;
+import com.gsitm.career.dto.CommentsDTO;
 import com.gsitm.career.dto.LectureDTO;
+import com.gsitm.career.dto.MemberDTO;
+import com.gsitm.career.service.ClassesService;
+import com.gsitm.career.service.CommentsService;
 import com.gsitm.career.service.LectureService;
 
 import lombok.extern.java.Log;
@@ -35,10 +39,19 @@ public class LectureController {
 	@Autowired
 	LectureService lectureService;
 
+	@Autowired
+	CommentsService commentsService;
+
+	@Autowired
+	ClassesService classesService;
+
+	private HttpSession session;
+	private String errorMsg = "";
+
 	/*
 	 * 강의 업로드 페이지 이동
 	 */
-	@RequestMapping("/upload")
+	@GetMapping("/upload")
 	public String lectureUpload() {
 		log.info("LectureController - lectureUpload()");
 		return "lecture/upload";
@@ -47,56 +60,146 @@ public class LectureController {
 	/*
 	 * 강의 업로등 - 구현 중
 	 */
-	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String lectureInsert(@ModelAttribute(name = "lectureDTO") LectureDTO lectureDTO, @RequestParam("lectureThumbnail") MultipartFile files, HttpServletRequest request) {
+	@PostMapping("/insert")
+	public String lectureInsert(@RequestParam("lectureDTO") MultipartFile files, HttpServletRequest request) throws Exception {
 		log.info("LectureController - lectureInsert()");
+		session = (HttpSession) request.getSession();
 
-		try {
-            String origFilename = files.getOriginalFilename();
-            String filename = new MD5Generator(origFilename).toString();
-            /* 실행되는 위치의 'files' 폴더에 파일이 저장됩니다. */
-            String savePath = System.getProperty("user.dir") + "\\files";
-            /* 파일이 저장되는 폴더가 없으면 폴더를 생성합니다. */
-            if (!new File(savePath).exists()) {
-                try{
-                    new File(savePath).mkdir();
-                }
-                catch(Exception e){
-                    e.getStackTrace();
-                }
-            }
-            log.info("filename: " + filename);
+		session = request.getSession();
+		AcademyDTO academyDTO = (AcademyDTO) session.getAttribute("academy");
+		String academyEmail = academyDTO.getAcademyEmail();
+		LectureDTO lectureDTO = new LectureDTO();
 
-            String filePath = savePath + "\\" + filename;
-            files.transferTo(new File(filePath));
+		int num = lectureService.lectureCount();
+        File destinationFile;
+        String destinationFileName;
+        String fileName = "lecture" + num +".PNG";
+        String fileUrl = "C:\\fileUpload\\images"+fileName;
 
-			HttpSession session = (HttpSession) request.getSession();
-			AcademyDTO academyDTO = (AcademyDTO) session.getAttribute("academy");
-			String email = academyDTO.getAcademy_email();
+        String lectureStartDate = request.getParameter("lectureStartDate");
+        String lectureEndDate = request.getParameter("lectureEndDate");
+        String period = lectureStartDate + " ~ " + lectureEndDate;
 
-			lectureDTO.setLectureThumbnail(filename);
+        lectureDTO.setLectureName(request.getParameter("lectureName"));
+        lectureDTO.setLectureTeacher(request.getParameter("lectureTeacher"));
+        lectureDTO.setLecturePeriod(period);
+        lectureDTO.setLecturePrice(request.getParameter("lecturePrice"));
+        lectureDTO.setLectureCategoryMainCategory(request.getParameter("lectureCategory1"));
+        lectureDTO.setLectureCategorySubCategory(request.getParameter("lectureCategory2"));
+        lectureDTO.setLectureThumbnail(fileName);
+        lectureDTO.setLectureContents(request.getParameter("lectureContents"));
+        lectureDTO.setLectureAcaedmy(academyEmail);
 
-			lectureService.insertLecture(lectureDTO, email);
+        do {
+            destinationFileName =".PNG" ;
+            destinationFile = new File(fileUrl + destinationFileName);
+        } while (destinationFile.exists());
 
-		} catch(Exception e) {
-            e.printStackTrace();
-        }
+        destinationFile.getParentFile().mkdirs();
+        files.transferTo(destinationFile);
+
+        lectureService.insertLecture(lectureDTO);
+
 		return "redirect:/";
 	}
 
 	/*
 	 * 강의 리스트 출력
 	 */
-	@RequestMapping(value = {"/{category1}"}, method = RequestMethod.GET)
-	public String lecture(@PathVariable("category1") String category1, HttpServletRequest request, Model model) {
-		log.info("LectureController - lecture()");
-		ArrayList<LectureDTO> lectureList =  lectureService.lectureList(category1);
+	@GetMapping("/{category1}")
+	public String lecture(@PathVariable(value = "category1", required = true) String category1, HttpServletRequest request, Model model) throws Exception {
+		log.info("LectureController - lecture() category1: " + category1);
+		ArrayList<LectureDTO> lectureList = null;
 
-		String path = request.getSession().getServletContext().getRealPath("");// 절대경로
-		log.info("path: " + path);
+		lectureList =  lectureService.lectureList(category1);
 
 		model.addAttribute("lecture", lectureList);
+		model.addAttribute("category1", category1);
 
-		return "lecture/programming/programming";
+		String redirect ="lecture/" + category1;
+
+		return redirect;
+	}
+
+	/*
+	 * 강의 리스트 출력
+	 */
+	@GetMapping("/{category1}/{category2}")
+	public String lectureList(@PathVariable(value = "category1", required = true) String category1, @PathVariable(value = "category2", required = true) String category2, HttpServletRequest request, Model model) throws Exception {
+		log.info("LectureController - lecture() category1: " + category1 + ", category2: " + category2);
+		ArrayList<LectureDTO> lectureList = null;
+
+		lectureList =  lectureService.lectureListDetail(category1, category2);
+
+		model.addAttribute("lecture", lectureList);
+		model.addAttribute("category1", category1);
+		model.addAttribute("category2", category2);
+
+		String redirect ="lecture/" + category1 + "/" + category1 + "Category";
+
+		return redirect;
+	}
+
+
+	@SuppressWarnings("finally")
+	@GetMapping("/detail/{lectureNo}")
+	public String lectureDetail(@PathVariable("lectureNo") String lectureNo, HttpServletRequest request, Model model) throws Exception {
+		log.info("LectureController - lecture() category1: " + lectureNo);
+		session = (HttpSession) request.getSession();
+
+		String lecNo = lectureNo;
+		LectureDTO lecture = null;
+		ArrayList<CommentsDTO> commentList = null;
+		MemberDTO member = null;
+		Boolean isClassListen = false;
+
+		lecture =  lectureService.lectureDetail(lectureNo);
+		commentList = commentsService.list(lecNo);
+
+		try {
+			member = (MemberDTO) session.getAttribute("member");
+			String memberEmail = member.getMemberEmail();
+
+			isClassListen = classesService.isListenLecture(lecNo, memberEmail);
+
+		} catch (NullPointerException e) {
+			model.addAttribute("error", errorMsg);
+			log.info("lectureDetail: " + member.toString());
+
+		} finally {
+			model.addAttribute("lecture", lecture);
+			model.addAttribute("commentList", commentList);
+			model.addAttribute("isClassListen", isClassListen);
+			this.errorMsg = "";
+
+			String redirect = "lecture/detail";
+
+			return redirect;
+		}
+	}
+
+	@SuppressWarnings("finally")
+	@PostMapping("apply/{lectureNo}")
+	public String lectureApply(@PathVariable("lectureNo") String lectureNo, HttpServletRequest request, Model model) {
+		log.info("lectureApply() lectureNo: " + lectureNo);
+
+		session = (HttpSession) request.getSession();
+		MemberDTO member = null;
+		String memberEmail = null;
+		String redirect = "redirect:/lecture/detail/" + lectureNo;
+
+		try {
+			member = (MemberDTO) session.getAttribute("member");
+			memberEmail = member.getMemberEmail();
+
+			classesService.apply(lectureNo, memberEmail);
+		} catch (NullPointerException e) {
+			this.errorMsg = "로그인을 해야합니다.";
+			log.info("lectureApply: " + member.toString());
+
+			return redirect;
+		} finally {
+			return redirect;
+		}
 	}
 }

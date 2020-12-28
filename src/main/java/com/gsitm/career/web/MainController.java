@@ -6,12 +6,21 @@
  */
 package com.gsitm.career.web;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.gsitm.career.dto.AcademyDTO;
+import com.gsitm.career.dto.LectureDTO;
+import com.gsitm.career.dto.MemberDTO;
+import com.gsitm.career.service.AcademyService;
+import com.gsitm.career.service.LectureService;
+import com.gsitm.career.service.MemberService;
 
 import lombok.extern.java.Log;
 
@@ -19,8 +28,17 @@ import lombok.extern.java.Log;
 @Controller
 public class MainController {
 
-	@RequestMapping("/")
-	public ModelAndView main(ModelAndView modelAndView) {
+	@Autowired
+	AcademyService academyService;
+
+	@Autowired
+	LectureService lectureService;
+
+	@Autowired
+	MemberService memberSerivce;
+
+	@GetMapping("/")
+	public ModelAndView main(ModelAndView modelAndView) throws Exception {
 		log.info("MainController - main()");
 		modelAndView.setViewName("index");
 
@@ -30,8 +48,8 @@ public class MainController {
 	/*
 	 * 회원가입 페이지 이동
 	 */
-	@RequestMapping("/login/signIn")
-	public ModelAndView login(ModelAndView modelAndView) {
+	@GetMapping("/login/signIn")
+	public ModelAndView login(ModelAndView modelAndView) throws Exception {
 		log.info("MainController - login()");
 		modelAndView.setViewName("login/signIn");
 
@@ -41,12 +59,34 @@ public class MainController {
 	/*
 	 * 로그아웃
 	 */
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String memberLogout(HttpSession session) {
-		log.info("MemberController - memberLogout()");
+	@GetMapping("/logout")
+	public String memberLogout(HttpSession session) throws Exception {
+		log.info("MainController - memberLogout()");
 		session.setAttribute("member", null);
 		session.setAttribute("academy", null);
 
 		return "redirect:/";
+	}
+
+	/*
+	 * 로그아웃
+	 */
+	@GetMapping("/admin")
+	public ModelAndView admin(HttpSession session) throws Exception {
+		log.info("MainController - admin()");
+
+		ModelAndView modelAndView = new ModelAndView();
+
+		ArrayList<AcademyDTO> academyList = academyService.academyList();
+		ArrayList<LectureDTO> lectureList = lectureService.lectureListAll();
+		ArrayList<MemberDTO> memberList = memberSerivce.selectUser();
+
+		modelAndView.addObject("academyList", academyList);
+		modelAndView.addObject("lectureList", lectureList);
+		modelAndView.addObject("memberList", memberList);
+
+		modelAndView.setViewName("admin/admin");
+
+		return modelAndView;
 	}
 }

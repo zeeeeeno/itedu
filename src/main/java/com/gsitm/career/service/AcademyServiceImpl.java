@@ -18,6 +18,7 @@ import lombok.extern.java.Log;
 @Service
 @Transactional
 public class AcademyServiceImpl implements AcademyService{
+
 	@Autowired
 	AcademyMapper academyMapper;
 
@@ -27,10 +28,10 @@ public class AcademyServiceImpl implements AcademyService{
 	 * 	1) academyDTO: 학원 회원가입 정보
 	 */
 	@Override
-	public void signUp(AcademyDTO academyDTO) {
+	public void signUp(AcademyDTO academyDTO) throws Exception {
 		log.info("AcademyServiceImpl - signUp()");
 
-		academyMapper.signUp(academyDTO.getAcademy_email(), academyDTO.getAcademy_pw(), academyDTO.getAcademy_name());
+		academyMapper.signUp(academyDTO.getAcademyEmail(), academyDTO.getAcademyPw(), academyDTO.getAcademyName());
 	}
 
 	/*
@@ -39,13 +40,13 @@ public class AcademyServiceImpl implements AcademyService{
 	 * 	1) academyDTO: 로그인 입력 정보
 	 */
 	@Override
-	public Boolean login(AcademyDTO academyDTO) {
+	public Boolean login(AcademyDTO academyDTO) throws Exception {
 		log.info("AcademyServiceImpl - login()");
-		String email = academyDTO.getAcademy_email();
+		String email = academyDTO.getAcademyEmail();
 		String dbPW = getPassword(email);
-		log.info("dbPW: " + dbPW +", " + academyDTO.getAcademy_pw());
+		log.info("dbPW: " + dbPW +", " + academyDTO.getAcademyPw());
 
-		if (dbPW.equals(academyDTO.getAcademy_pw())) {
+		if (dbPW.equals(academyDTO.getAcademyPw())) {
 			log.info("로그인 성공");
 			return true;
 		} else {
@@ -59,7 +60,7 @@ public class AcademyServiceImpl implements AcademyService{
 	 * - parameter
 	 * 	1) email: 학원 아이디
 	 */
-	public String getPassword(String email) {
+	public String getPassword(String email) throws Exception {
 		log.info("AcademyServiceImpl - getPassword() email: " + email);
 
 		return academyMapper.getPasswordAcademy(email);
@@ -71,9 +72,22 @@ public class AcademyServiceImpl implements AcademyService{
 	 * 	1) memberEmail: 학원 아이디
 	 */
 	@Override
-	public ArrayList<AcademyDTO> getAcademyInfo(String memberEmail) {
+	public AcademyDTO getAcademyInfo(String memberEmail) throws Exception {
 		log.info("AcademyServiceImpl - getAcademyInfo() - memberEmail: " + memberEmail);
 
 		return academyMapper.getAcademyInfo(memberEmail);
+	}
+
+	@Override
+	public ArrayList<AcademyDTO> academyList() throws Exception {
+		log.info("AcademyServiceImpl - academyList()");
+
+		return academyMapper.academyList();
+	}
+
+	@Override
+	public void academyApprove(String academyEmail) throws Exception {
+		log.info("AcademyServiceImpl - academyApprove() academyEmail: " + academyEmail);
+		academyMapper.academyApprove(academyEmail);
 	}
 }

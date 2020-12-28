@@ -14,20 +14,25 @@
     <hr width="80%">
     <div id="contents_container">
         <div id="contents_title">
-            <p>전체 | <strong> 프로그래밍</strong></p>
+            <p th:if="${category2} == null">
+                                  전체 | <strong th:text="${category1}"></strong>
+            </p>
+            <p th:if="${category2} != null">
+                                  전체 | <b th:text="${category1}"></b> | <strong th:text="${category2}"></strong>
+            </p>
         </div>
         <div id="contents_content">
            <div th:each="lec : ${lecture}" class="content_container" id="content_container" style="width: 214px; height: 330px; margin: 20px; flex-wrap: wrap; flex-direction: row;">
-                <a id="content_a">
+                <div id="content_a" th:onclick="'location.href=\''+@{detail/{lectureNo}(lectureNo = ${lec.lectureNo})} + '\';'">
                     <div>
                         <figure>
                              <img src="/ITEdu/fileFolder/<%=lectureVO.getLectureThumbnail()%>" id="lecure_img"/>
                         </figure>
                     </div>
-                    <div id="content_title" th:text="${lec.lectureName}"><%= lectureVO.getLectureTitle() %></div>
-                    <div class="content_inContents" th:text="${lec.lectureTeacher}" style="margin-left: 5px;"><%= lectureVO.getLectureTeacher() %> </div>
-                    <div class="content_inContents" th:text="${lec.lecturePrice}" style="margin-left: 5px;">₩<%= decimalFormat.format(price) %></div>
-                </a>
+                    <div id="content_title" th:text="${lec.lectureName}"></div>
+                    <div class="content_inContents" th:text="${lec.lectureTeacher}" style="margin-left: 5px;"></div>
+                    <div class="content_inContents" th:text="${lec.lecturePrice}" style="margin-left: 5px;"></div>
+                </div>
             </div>
         </div>
     </div>
