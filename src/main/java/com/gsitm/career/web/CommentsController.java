@@ -17,6 +17,11 @@ import com.gsitm.career.service.CommentsService;
 
 import lombok.extern.java.Log;
 
+/**
+ * 댓글 컨트롤러
+ * @author leejinho
+ *
+ */
 @Log
 @Controller
 @RequestMapping("/comments")
@@ -27,6 +32,14 @@ public class CommentsController {
 
 	private HttpSession session;
 
+	/**
+	 * 댓글작성
+	 * @param lecutreNo
+	 * @param commentsDTO
+	 * @param request
+	 * @return
+	 * @throws Exception
+	 */
 	@PostMapping("/register/{lecutreNo}")
 	public String registerComments(@PathVariable("lecutreNo") String lecutreNo, @ModelAttribute(name = "commentsDTO") CommentsDTO commentsDTO, HttpServletRequest request) throws Exception {
 		log.info("CommentsController - registerComments() lecutreNo: " + lecutreNo + ", commentsDTO: " + commentsDTO);
@@ -42,6 +55,13 @@ public class CommentsController {
 		return redirect;
 	}
 
+	/**
+	 * 댓글 삭제
+	 * @param commentsNo
+	 * @param lectureNo
+	 * @return
+	 * @throws Exception
+	 */
 	@GetMapping("/delete/{commentsNo}/{lectureNo}")
 	public String deleteComments(@PathVariable("commentsNo") String commentsNo, @PathVariable("lectureNo") String lectureNo) throws Exception {
 		log.info("CommentsController - registerdeleteComments() commentsNo: " + commentsNo);
