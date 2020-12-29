@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.gsitm.career.dto.CommentsDTO;
 
 /**
- * Call Comments SQL
+ * Connect Comments SQL
  * @author leejinho
  *
  */

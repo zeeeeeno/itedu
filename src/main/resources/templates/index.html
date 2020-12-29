@@ -24,34 +24,58 @@
         <img onclick="gotoImg6()" src="/assets/img/main6.PNG" width="90%" height="500px" style="margin-left: 15px; margin-right: 30px; margin-top: 20px; border: 3vh    "/>
     </div>
     <script type="text/javascript">
+    /**
+    * 내비게이션 바 고정
+    */
     function style_init() {
         $('#gnbNavBar').css('position', 'fixed');
     }
 
+    /**
+     * 이미지 URL 이동
+     */
     function gotoImg1() {
         window.open("https://www.inflearn.com/pages/coding-basic");
     }
 
+    /**
+     * 이미지 URL 이동
+     */
     function gotoImg2() {
         window.open("https://www.inflearn.com/pages/curation-new-lecture-202011");
     }
 
+    /**
+     * 이미지 URL 이동
+     */
     function gotoImg3() {
         window.open("https://www.inflearn.com/pages/recommend-courses?utm_source=inflearn&utm_medium=page&utm_campaign=hero_banner&utm_content=chobo");
     }
 
+    /**
+     * 이미지 URL 이동
+     */
     function gotoImg4() {
         window.open("https://www.inflearn.com/courses?order=seq&discounted=true&utm_source=inflearn&utm_medium=page&utm_campaign=hero_banner&utm_content=discount");
     }
 
+    /**
+     * 이미지 URL 이동
+     */
     function gotoImg5() {
         window.open("https://www.inflearn.com/courses?view=card&order=recent&utm_source=inflearn&utm_medium=page&utm_campaign=hero_banner&utm_content=new");
     }
 
+    /**
+     * 이미지 URL 이동
+     */
     function gotoImg6() {
         window.open("https://www.inflearn.com/pages/kakao-friends-event");
     }
 
+    /**
+     * 윈도우 로드 시 스타일 자동 적용
+     */
     window.onload = function() {
         style_init();
     }

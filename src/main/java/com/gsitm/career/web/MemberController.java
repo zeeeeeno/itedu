@@ -57,7 +57,7 @@ public class MemberController {
 			HttpSession session = (HttpSession) request.getSession();
 
 			session.setAttribute("member", member);
-			modelAndView.setViewName("/");
+			modelAndView.setViewName("index");
 
 			return modelAndView;
 		} else {

@@ -71,7 +71,7 @@
                </ul>
            </div>
             <div style="width: 100%; height: 70px;">
-              <a th:if="${member} != null and ${member.memberAuth} == admin" href="/notice/create" style="float: right;">Create New Register</a>
+              <a th:if="${session.member.memberAuth} == admin" href="/notice/create" style="float: right;">Create New Register</a>
             </div>
         </div>
     </div>

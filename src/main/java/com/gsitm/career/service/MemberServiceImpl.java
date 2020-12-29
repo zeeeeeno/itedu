@@ -65,10 +65,15 @@ public class MemberServiceImpl implements MemberService {
 		log.info("MemberServiceImpl - login() memberDTO: " + memberDTO);
 		String email = memberDTO.getMemberEmail();
 		String dbPW = getPassword(email);
-		if (dbPW.equals(memberDTO.getMemberPasswd())) {
-			return true;
-		} else
+		try {
+			if (dbPW.equals(memberDTO.getMemberPasswd())) {
+				return true;
+			} else
+				return false;
+		} catch (Exception e) {
+			// TODO: handle exception
 			return false;
+		}
 	}
 
 	/**

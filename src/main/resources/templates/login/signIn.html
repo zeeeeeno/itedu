@@ -193,6 +193,9 @@
     </script>
 </body>
 <script>
+/*
+ * CapsLock 키 감지
+ */
 function caps_lock(e) {
         var keyCode = 0;
         var shiftKey = false;
@@ -215,6 +218,9 @@ function hide_caps_lock() {
      $("#capslock").hide();
 }
 
+/*
+ * 도로명 주소 가져오기
+ */
 function sample6_execDaumPostcode() {
     new daum.Postcode({
         oncomplete: function(data) {
@@ -261,7 +267,9 @@ function sample6_execDaumPostcode() {
     }).open();
 }
 
-// Sldie Part
+/*
+ * Login / Sign Up Slide
+ */
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
 const container = document.getElementById('container-slider');
@@ -274,16 +282,23 @@ signInButton.addEventListener('click', () => {
     container.classList.remove("right-panel-active-slider");
 });
 
-// Get the modal
+/*
+ * open the modal
+ */
 function openModal() {
    document.getElementById('id01').style.display = "block";
 }
 
+/*
+ * close the model
+ */
 function closeModal() {
    document.getElementById('id01').style.display = "none";
 }
 
-// layout
+/*
+ * layout 초기화
+ */
 function style_init() {
     $('#gnbNavBar').css('margin-bottom', '10px');
     $('#dropdowm_menu').css('top', '-10px');

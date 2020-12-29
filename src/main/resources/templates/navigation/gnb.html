@@ -33,27 +33,6 @@
                 "></i>
             </a>
             <ul class="dropdown-menu dropdown-menu-center">
-<!--                 <li><a><%= memberVO.getMember_name() %></a></li>
-                <li><a href="/ITEdu/adminListAll.do?numAcademy=1&numLecture=1&numMember=1">Manage</a></li>
-                <li class="divider"></li>
-                <li><a href="/ITEdu/noticeList.do?num=1">Notice</a></li>
-                <li><a href="/ITEdu/views/SliderLogin/Logout.jsp">Logout</a></li>
-
-                <li><a><%= academyVO.getAcademy_email() %></a></li>
-                Spring boot 연동 시 구현
-                    <li><a href="/ITEdu/views/academy/academy.jsp">Academy</a></li>
-
-                <li><a href="/ITEdu/views/academy/upload.jsp">UpLoad</a></li>
-                <li class="divider"></li>
-                <li><a href="/ITEdu/noticeList.do?num=1">Notice</a></li>
-                <li><a href="/ITEdu/views/SliderLogin/Logout.jsp">Logout</a></li>
-
-                <li><a><%= memberVO.getMember_name() %></a></li>
-                <li><a href="/ITEdu/views/user/mypage.jsp">MyPage</a></li>
-                <li class="divider"></li>
-                <li><a href="/ITEdu/noticeList.do?num=1">Notice</a></li>
-                <li><a href="/ITEdu/views/SliderLogin/Logout.jsp">Logout</a></li> -->
-
                 <li th:if="${session['member']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['member'].memberName}"></a></li>
                 <li th:if="${session['academy']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['academy'].academyName}"></a></li>
                 <li th:if="${session['academy']}"><a th:href="@{/lecture/upload}">UpLoad</a></li>
@@ -67,14 +46,4 @@
         </div>
     </div>
 </body>
-<script>
-function openSearch() {
-  document.getElementById("myOverlay").style.display = "block";
-  document.getElementById(".form-slider").style.display = "block";
-}
-
-function closeSearch() {
-  document.getElementById("myOverlay").style.display = "none";
-}
-</script>
 </html>

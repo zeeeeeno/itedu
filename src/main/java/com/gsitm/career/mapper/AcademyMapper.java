@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.gsitm.career.dto.AcademyDTO;
 
 /**
- * Call Academy SQL
+ * Connect Academy SQL
  * @author leejinho
  *
  */

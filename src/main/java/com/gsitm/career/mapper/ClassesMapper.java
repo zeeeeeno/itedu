@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.gsitm.career.dto.ClassesDTO;
 
 /**
- * Call Classes SQL
+ * Connect Classes SQL
  * @author leejinho
  *
  */

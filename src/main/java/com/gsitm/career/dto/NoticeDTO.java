@@ -9,6 +9,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
  */
 import lombok.Data;
 
+/**
+ * 공지사항 Data Transaction Object
+ * @author leejinho
+ *
+ */
 @Data
 public class NoticeDTO {
 	private int noticeNo;
