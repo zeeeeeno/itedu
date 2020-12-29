@@ -13,13 +13,13 @@
             <div style="width: 100%;">
                 <p class="mg-t-30 mg-b-10" style="float: left; margin-right: 560px;">총게시물: <strong th:text="${noticeSize}"></strong></p>
                 <div>
-                    <form action="/ITEdu/noticeSearch.do" method="post">
+                    <form action="/notice/search">
                         <select name="category" style="height: 25px;">
                             <option>제목</option>
                             <option>날짜</option>
                         </select>
                         <input name="keyword" type="text" placeholder="검색어를 입력해주세요.">
-                        <input type="submit" name="검색" value="검색">
+                        <input type="submit" value="검색">
                     </form>
                 </div>
             </div>
@@ -42,7 +42,7 @@
                             </td>
                             <td style="width: 20%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.noticeWriter}"></td>
                             <td style="width: 20%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.createTime}"></td>
-                            <td style="width: 10%; text-align: center; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.noticeClicknum}"></td>
+                            <td style="width: 10%; text-align: center; border-bottom: 1px solid gray; font-weight: bold;" th:text="${board.noticeClickNum}"></td>
                         </tr>
                         <tr th:if="${notice.size()} <= 0">
                             <td colspan="5">게시물이 없습니다.</td>
@@ -61,7 +61,7 @@
                        <a th:text="'<'"></a>
                    </li>
 
-                   <li th:each="page: ${#numbers.sequence(start, end-1)}" style="list-style-type: none; float: left; margin: 5px;">
+                   <li th:each="page: ${#numbers.sequence(start, end)}" style="list-style-type: none; float: left; margin: 5px;">
                        <a th:href="|@{/notice/list?num={page} (page = ${page})}|" th:text="${page}"></a>
                    </li>
 

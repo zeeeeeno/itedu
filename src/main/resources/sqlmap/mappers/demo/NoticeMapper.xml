@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gsitm.career.mapper.NoticeMapper">
-    <select id="selectNotice" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
-        SELECT *
+    <select id="selectNotice" resultType="NoticeDTO">
+        SELECT notice_no, notice_title, notice_writer, notice_contents, notice_clickNum, DATE_FORMAT(create_time, '%Y-%m-%d') AS create_time, DATE_FORMAT(update_time, '%Y-%m-%d') AS update_time, use_YN
         FROM notice
         WHERE USE_YN = 1
-        ORDER BY NOTICE_NO DESC
+        ORDER BY notice_no DESC
         LIMIT #{displayPost}, #{postNum}
     </select>
 
@@ -15,14 +15,15 @@
     </insert>
 
     <select id="noticeRead" resultType="com.gsitm.career.mybatis.type.CamelCaseMap">
-        SELECT *
+        SELECT notice_no, notice_title, notice_writer, notice_contents, notice_clickNum, DATE_FORMAT(create_time, '%Y-%m-%d') AS create_time, DATE_FORMAT(update_time, '%Y-%m-%d') AS update_time, use_YN
         FROM notice
         WHERE NOTICE_NO = #{PARAM1}
     </select>
 
     <update id="updateNotice">
-        UPDATE notice SET NOTICE_TITLE = #{PARAM2}, NOTICE_CONTENTS = #{PARAM3}
-        WHERE NOTICE_NO = #{PARAM1}
+        UPDATE notice
+        SET NOTICE_TITLE = #{title}, NOTICE_CONTENTS = #{Contents}
+        WHERE NOTICE_NO = #{noticeNo}
     </update>
 
     <update id="deleteNotice">
@@ -34,10 +35,30 @@
     <select id="noticeCount" resultType="int">
         SELECT count(notice_no)
         FROM notice
+        WHERE USE_YN = 1
     </select>
 
-    <update id="countViews">
-        UPDATE notice SET NOTICE_TITLE = #{PARAM2}, NOTICE_CONTENTS = #{PARAM3}
+    <select id="selectViews" resultType = "int">
+        SELECT notice_clickNum
+        FROM notice
+        WHERE NOTICE_NO = #{noticeNo}
+    </select>
+
+    <update id="updateSelectViews">
+        UPDATE notice
+        SET notice_clickNum = #{addClickNum}
         WHERE NOTICE_NO = #{noticeNo}
     </update>
+
+    <select id="noticeSearchTitle" resultType="NoticeDTO">
+        SELECT notice_no, notice_title, notice_writer, notice_contents, notice_clickNum, DATE_FORMAT(create_time, '%Y-%m-%d') AS create_time, DATE_FORMAT(update_time, '%Y-%m-%d') AS update_time, use_YN
+        FROM notice
+        WHERE notice_title = #{keyword}
+    </select>
+
+    <select id="noticeSearchDate" resultType="NoticeDTO">
+        SELECT notice_no, notice_title, notice_writer, notice_contents, notice_clickNum, DATE_FORMAT(create_time, '%Y-%m-%d') AS create_time, DATE_FORMAT(update_time, '%Y-%m-%d') AS update_time, use_YN
+        FROM notice
+        WHERE create_time = #{keyword}
+    </select>
 </mapper>

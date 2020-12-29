@@ -6,6 +6,7 @@
 package com.gsitm.career.web;
 
 import java.io.File;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,6 +64,8 @@ public class LectureController {
 	@PostMapping("/insert")
 	public String lectureInsert(@RequestParam("lectureDTO") MultipartFile files, HttpServletRequest request) throws Exception {
 		log.info("LectureController - lectureInsert()");
+		DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+
 		session = (HttpSession) request.getSession();
 
 		session = request.getSession();
@@ -74,25 +77,33 @@ public class LectureController {
         File destinationFile;
         String destinationFileName;
         String fileName = "lecture" + num +".PNG";
-        String fileUrl = "C:\\fileUpload\\images"+fileName;
+        String fileUrl = "C:\\fileUpload\\images\\" + fileName;
 
         String lectureStartDate = request.getParameter("lectureStartDate");
         String lectureEndDate = request.getParameter("lectureEndDate");
         String period = lectureStartDate + " ~ " + lectureEndDate;
 
+        int lecturePrice = Integer.parseInt(request.getParameter("lecturePrice"));
+        String price = decimalFormat.format(lecturePrice);
+
+        String category1 = request.getParameter("lectureCategory1");
+		String category2 = request.getParameter("lectureCategory2");
+        category1 = category1.replaceAll(" ", "");
+		category2 = category2.replaceAll(" ", "");
+		category2 = category2.replaceAll("/", "");
+
         lectureDTO.setLectureName(request.getParameter("lectureName"));
         lectureDTO.setLectureTeacher(request.getParameter("lectureTeacher"));
         lectureDTO.setLecturePeriod(period);
-        lectureDTO.setLecturePrice(request.getParameter("lecturePrice"));
-        lectureDTO.setLectureCategoryMainCategory(request.getParameter("lectureCategory1"));
-        lectureDTO.setLectureCategorySubCategory(request.getParameter("lectureCategory2"));
+        lectureDTO.setLecturePrice(price);
+        lectureDTO.setLectureCategoryMainCategory(category1);
+        lectureDTO.setLectureCategorySubCategory(category2);
         lectureDTO.setLectureThumbnail(fileName);
         lectureDTO.setLectureContents(request.getParameter("lectureContents"));
         lectureDTO.setLectureAcaedmy(academyEmail);
 
         do {
-            destinationFileName =".PNG" ;
-            destinationFile = new File(fileUrl + destinationFileName);
+            destinationFile = new File(fileUrl);
         } while (destinationFile.exists());
 
         destinationFile.getParentFile().mkdirs();

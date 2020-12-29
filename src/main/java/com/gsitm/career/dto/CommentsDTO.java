@@ -9,8 +9,8 @@ import lombok.Data;
  */
 @Data
 public class CommentsDTO {
-	private int commentNoMain;
-	private int commentNoSub;
+	private int commentsNoMain;
+	private int commentsNoSub;
 	private String commentsContents;
 	private String lectureLectureNo;
 	private String userEmail;

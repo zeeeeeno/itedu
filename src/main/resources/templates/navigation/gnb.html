@@ -3,10 +3,6 @@
       lang="ko"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
 <body th:fragment="gnbFragment">
     <div id="myOverlay" class="overlay" style="background-color: rgba(0, 0, 0, 0.9); z-index: 10">
       <span class="closebtn" onclick="closeSearch()" title="Close Overlay">×</span>
@@ -28,9 +24,9 @@
         <a th:href="@{/lecture/WorkSkill}" class="gnbNavbarA">Work Skill</a>
         <a th:href="@{/lecture/JobBasic}" class="gnbNavbarA">Job Basic</a>
         <a th:href="@{/lecture/Career}" class="gnbNavbarA">Career</a>
-        <a class="gnbNavbarA" id="gnbNavbarA"> <!-- onclick="openSearch()" / spring boot 활용 시 구현  -->
+<!--         <a class="gnbNavbarA" id="gnbNavbarA"> onclick="openSearch()" / spring boot 활용 시 구현
             <i class="fas fa-search" aria-hidden="true" style="color: #ffffff; font-size: 20px; vertical-align: middle;"></i>
-        </a>
+        </a> -->
         <div class="dropdown text-center" id="dropdown_menu">
             <a class="dropdown-toggle gnbNavbarA" data-toggle="dropdown">
                 <i class="fas fa-shopping-bag" aria-hidden="true" style="color:#ffffff; font-size:20px; vertical-align: middle;
@@ -61,7 +57,7 @@
                 <li th:if="${session['member']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['member'].memberName}"></a></li>
                 <li th:if="${session['academy']}"><a style="font-weight: bold" th:text="'Hello, ' + ${session['academy'].academyName}"></a></li>
                 <li th:if="${session['academy']}"><a th:href="@{/lecture/upload}">UpLoad</a></li>
-                <li th:if="${session['member']}"><a th:href="@{/admin}">Manage</a></li>
+                <li th:if="${session['member']} != null and ${session['member'].memberAuth} == 'admin'"><a th:href="@{/admin}">Manage</a></li>
                 <li th:if="${session['member']} == null and ${session['academy']} == null"><a href="/login/signIn">Sign In</a></li>
                 <li th:if="${session['member']} == null and ${session['academy']} == null"><a href="/academy/">Contact Us</a></li>
                 <li class="divider"></li>

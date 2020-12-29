@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <div id="rightMenu" style="z-index: 1; position: absolute; top: 80px; right: 100px; z-index: 1; width: 320px; background-color: white; border: 1px solid gray; border-radius: 4vh; box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .05); transition: top .5s; overflow: hidden; padding: 20px;">
+    <div id="rightMenu" style="z-index: 1; position: absolute; top: 80px; right: 100px; z-index: 1; width: 320px; background-color: white; border: 1px solid gray; border-radius: 4vh; box-shadow: 10px 5px 5px black; transition: top .5s; overflow: hidden; padding: 20px;">
         <div style="width: 100%">
             <label style="color: gray;">가격</label>
             <p class="mg-t-0 mg-b-20" style="font-size: x-large;" th:text="'₩' + ${lecture.lecturePrice}"></p>
@@ -71,7 +71,7 @@
                                    <button style="border: none;">수정</button>
                                </a>
                             -->
-                               <a th:if="${session.member} != null and ${session.member.memberEmail} == ${comment.userEmail}" href="/ITEdu/commentsDelete.do?commentsNo=<%= commentsVO.getComment_no_sub() %>&lectureNo=<%= commentsVO.getLecture_no() %>">
+                               <a th:if="${session.member} != null and ${session.member.memberEmail} == ${comment.userEmail}" th:href="@{/comments/delete/{commentsNo}/{lectureNo} (commentsNo = ${comment.commentsNoSub}, lectureNo = ${lecture.lectureNo})}">
                                    <button style="border: none;">삭제</button>
                                </a>
                            </div>

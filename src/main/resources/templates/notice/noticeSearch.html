@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html
+      lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/basic">
+<body layout:fragment="content">
+    <div id="notice_area" style="width: 100%; height: 537px;">
+        <div style="width: 75%; height: 90%; background-color: white; margin: 0px auto;">
+            <div style="width: 100%; height: 100px;">
+                <h1 style="font-weight: bold;">공지사항</h1>
+            </div>
+            <div style="width: 100%; height: 50px;">
+                <p style="float: left; margin-right: 560px;">총게시물: <strong th:text="${noticeList.size}"></strong></p>
+                <div>
+                    <a href="/notice/list?num=1" style="float: right; font-size: large;">목록</a>
+                </div>
+            </div>
+            <div>
+                <table style="width: 100%;">
+                    <thead style="border-right: none; border-top: 4px solid black; background-color: rgb(224, 224, 224);">
+                        <tr style="height: 50px; text-align: center; border-bottom: 1px solid gray;">
+                            <td style="width: 10%; text-align: center; border-right: 1px solid gray;">순번</td>
+                            <td style="width: 40%; text-align: center; border-right: 1px solid gray;">제목</td>
+                            <td style="width: 20%; text-align: center; border-right: 1px solid gray;">작성자</td>
+                            <td style="width: 20%; text-align: center; border-right: 1px solid gray;">등록일</td>
+                            <td style="width: 10%; text-align: center;">조회</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="text-align: center; height: 40px" th:each="notice : ${noticeList}">
+                            <td style="width: 10%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${notice.noticeNo}"></td>
+                            <td style="width: 40%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${notice.noticeTitle}">
+                                <a href="/ITEdu/noticeRead.do?noticeNo=<%= noticeVO.getNoticeNo()%>"></a>
+                            </td>
+                            <td style="width: 20%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${notice.noticeWriter}"></td>
+                            <td style="width: 20%; text-align: center; border-right: 1px solid gray; border-bottom: 1px solid gray; font-weight: bold;" th:text="${notice.createTime}"></td>
+                            <td style="width: 10%; text-align: center; border-bottom: 1px solid gray; font-weight: bold;" th:text="${notice.clickNum}"></td>
+                        </tr>
+                        <tr th:if="${noticeList.size} == 0">
+                            <td colspan="5" style="border-bottom: 1px solid gray; text-align: center; height: 80px">게시물이 없습니다.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

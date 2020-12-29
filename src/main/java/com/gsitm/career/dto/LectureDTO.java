@@ -1,5 +1,9 @@
 package com.gsitm.career.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Data;
 
 /**
@@ -20,6 +24,8 @@ public class LectureDTO {
 	private String lectureCategorySubCategory;
 	private String lectureContents;
 	private String lectureThumbnail;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
 	private String lectureCreDate;
 	private String lectureAcaedmy;
 }

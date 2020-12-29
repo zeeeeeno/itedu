@@ -180,6 +180,17 @@
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+         /*<![CDATA[*/
+         var result = [[ ${errorMsg} ]];
+         /*]]*/
+
+         $(document).ready(function(){
+             if(result){
+                 alert(result);
+             }
+         });
+    </script>
 </body>
 <script>
 function caps_lock(e) {

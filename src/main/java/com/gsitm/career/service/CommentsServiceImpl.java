@@ -49,4 +49,10 @@ public class CommentsServiceImpl implements CommentsService{
 
 		return commentsMapper.list(lectureNo);
 	}
+
+	@Override
+	public void deleteComments(String commentsNo) throws Exception {
+		log.info("deleteComments() commentsNo: " + commentsNo);
+		commentsMapper.delete(commentsNo);
+	}
 }

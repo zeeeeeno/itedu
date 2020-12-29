@@ -20,6 +20,7 @@ import lombok.extern.java.Log;
 @Service
 @Transactional
 public class NoticeServiceImpl implements NoticeService {
+
 	@Autowired
 	NoticeMapper noticeMapper;
 
@@ -104,7 +105,23 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public void countViews(Long noticeNo) throws Exception {
 		log.info("NoticeServiceImpl - countViews() noticeNo: " + noticeNo);
-		noticeMapper.countViews(noticeNo);
+		int selectViews = noticeMapper.selectViews(noticeNo);
+		int addNum = selectViews + 1;
+		noticeMapper.updateSelectViews(noticeNo, addNum);
 	}
 
+	@Override
+	public ArrayList<NoticeDTO> noticeSearch(String category, String keyword) throws Exception {
+		log.info("NoticeServiceImpl - noticeSearch() category: " + category + ", keyword: " + keyword);
+
+		ArrayList<NoticeDTO> arrayList = null;
+
+		if(category.equals("notice_title")) {
+			arrayList =  noticeMapper.noticeSearchTitle(keyword);
+		} else if(category.equals("notice_title")) {
+			arrayList =  noticeMapper.noticeSearchDate(keyword);
+		}
+
+		return arrayList;
+	}
 }

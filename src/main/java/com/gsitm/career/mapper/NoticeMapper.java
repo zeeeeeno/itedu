@@ -42,7 +42,7 @@ public interface NoticeMapper {
 	 * @param Title
 	 * @param Contents
 	 */
-	void updateNotice(Long noticeNo, String Title, String Contents);
+	void updateNotice(@Param("noticeNo")Long noticeNo, @Param("title")String title, @Param("Contents")String Contents);
 
 	/**
 	 * Delete Notice(UseYN = 0)
@@ -59,6 +59,26 @@ public interface NoticeMapper {
 	/**
 	 * Add countview
 	 * @param noticeNo
+	 * @return
 	 */
-	void countViews(@Param("noticeNo")Long noticeNo);
+	int selectViews(@Param("noticeNo")Long noticeNo);
+
+
+	void updateSelectViews(@Param("noticeNo")Long noticeNo, @Param("addClickNum")int addClickNum);
+
+	/**
+	 *
+	 * @param category
+	 * @param keyword
+	 * @return
+	 */
+	ArrayList<NoticeDTO> noticeSearchTitle(@Param("keyword")String keyword);
+
+	/**
+	 *
+	 * @param category
+	 * @param keyword
+	 * @return
+	 */
+	ArrayList<NoticeDTO> noticeSearchDate(@Param("keyword")String keyword);
 }

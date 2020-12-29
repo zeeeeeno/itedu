@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -38,6 +39,16 @@ public class CommentsController {
 		commentsService.regiser(contents, email, lecutreNo);
 
 		String redirect = "redirect:/lecture/detail/" + lecutreNo ;
+		return redirect;
+	}
+
+	@GetMapping("/delete/{commentsNo}/{lectureNo}")
+	public String deleteComments(@PathVariable("commentsNo") String commentsNo, @PathVariable("lectureNo") String lectureNo) throws Exception {
+		log.info("CommentsController - registerdeleteComments() commentsNo: " + commentsNo);
+
+		commentsService.deleteComments(commentsNo);
+		String redirect = "redirect:/lecture/detail/" + lectureNo ;
+
 		return redirect;
 	}
 }

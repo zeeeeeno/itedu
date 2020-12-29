@@ -131,4 +131,28 @@ public class NoticeController {
 		String redirect = "redirect:/notice/";
 		return redirect;
 	}
+
+	@GetMapping("/search")
+	public String noticeSearch(HttpServletRequest request, Model model) throws Exception {
+		log.info("NoticeController - noticeSearch()");
+
+		String category = request.getParameter("category");
+		String keyword = request.getParameter("keyword");
+
+
+		if (category.equals("제목")) {
+			category = "notice_title";
+		} else if (category.equals("날짜")) {
+			category = "create_time";
+		}
+
+		log.info("category: " + category + ", keyword: " + keyword);
+
+		ArrayList<NoticeDTO> noticeList = noticeService.noticeSearch(category, keyword);
+		log.info("noticeList.toString(): " + noticeList.toString());
+
+		model.addAttribute("noticeList", noticeList);
+
+		return "notice/noticeSearch";
+	}
 }

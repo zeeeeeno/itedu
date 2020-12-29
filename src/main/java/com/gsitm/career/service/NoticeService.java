@@ -63,4 +63,6 @@ public interface NoticeService {
 	 * @throws Exception
 	 */
 	public int noticeCount() throws Exception;
+
+	public ArrayList<NoticeDTO> noticeSearch(String category, String keyword) throws Exception;
 }

@@ -30,4 +30,6 @@ public interface CommentsMapper {
 	 * @throws Exception
 	 */
 	ArrayList<CommentsDTO> list(String lectureNo) throws Exception;
+
+	void delete(@Param("commentsNo")String commentsNo);
 }

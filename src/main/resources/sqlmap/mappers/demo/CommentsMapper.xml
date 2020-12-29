@@ -8,6 +8,12 @@
     <select id="list" resultType="CommentsDTO">
         SELECT *
         FROM comments
-        WHERE lecture_lecture_no = #{PARAM1};
+        WHERE lecture_lecture_no = #{PARAM1} and use_YN = 1;
     </select>
+
+    <update id="delete">
+        UPDATE comments
+        SET use_YN = 0
+        WHERE comments_no_sub = #{commentsNo}
+    </update>
 </mapper>

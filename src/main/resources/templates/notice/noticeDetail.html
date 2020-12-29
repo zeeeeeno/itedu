@@ -11,25 +11,25 @@
                 <h2 style="font-weight: bold;">공지사항</h2>
             </div>
             <div style="width: 100%; height: 350px;">
-                <table border="1px solid black" style="width: 100%;">
+                <table border="1" style="width: 100%;">
                     <thead>
                         <tr style="height: 50px; text-align: center;">
                             <td style="color: white; background-color: gray; font-weight: bold; border-bottom: 1px solid black;">제목</td>
                             <td style="width: 25%" th:text="${notice[0].noticeTitle}"></td>
                             <td style="color: white; background-color: gray; font-weight: bold; border-bottom: 1px solid black;">조회수</td>
-                            <td style="width: 25%" th:text="${notice[0].noticeClicknum}"><%= notice.getClickNum() %></td>
+                            <td style="width: 25%" th:text="${notice[0].noticeClicknum}"></td>
                         </tr>
                         <tr style="height: 50px; text-align: center;">
                             <td style="color: white; background-color: gray; font-weight: bold;">작성자</td>
-                            <td style="width: 25%" th:text="${notice[0].noticeWriter}"><%= notice.getNoticeWriter() %></td>
+                            <td style="width: 25%" th:text="${notice[0].noticeWriter}"></td>
                             <td style="color: white; background-color: gray; font-weight: bold;">작성일</td>
-                            <td style="width: 25%" th:text="${notice[0].updateTime}"><%= notice.getDate() %></td>
+                            <td style="width: 25%" th:text="${notice[0].updateTime}"></td>
                         </tr>
                         <tr style="height: 30px; text-align: center;"></tr>
                     </thead>
                     <tbody>
                         <tr style="height: 50px; text-align: center;">
-                            <td colspan="4" style="height: 200px;" th:text="${notice[0].noticeContents}"><%= notice.getNoticeContents() %></td>
+                            <td colspan="4" style="height: 200px;" th:text="${notice[0].noticeContents}"></td>
                         </tr>
                     </tbody>
                 </table>
@@ -41,7 +41,7 @@
                 <a th:href="@{/notice/delete/{noticeNo}(noticeNo = ${notice[0].noticeNo})}">
                     <input type="button" value="삭제" style="border: none; background-color: gray; color: white; width: 100px; height: 40px; border-radius: 3vh; font-weight: bold;"/>
                 </a>
-                <a th:href="@{/notice/}" style="font-weight: bold; float: right;">목록</a>
+                <a th:href="@{/notice/list?num=1}" style="font-weight: bold; float: right;">목록</a>
             </div>
         </div>
     </div>

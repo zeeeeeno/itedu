@@ -1,5 +1,9 @@
 package com.gsitm.career.dto;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 /**
  * Notice Data Transfer Object
  */
@@ -11,6 +15,8 @@ public class NoticeDTO {
 	private String noticeTitle;
 	private String noticeWriter;
 	private String noticeContents;
-	private int clickNum;
-	private String date;
+	private String noticeClickNum;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern="yyyy-MM-dd")
+	private String createTime;
 }

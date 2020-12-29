@@ -26,4 +26,6 @@ public interface CommentsService {
 	 * @throws Exception
 	 */
 	public ArrayList<CommentsDTO> list(String lectureNo) throws Exception;
+
+	public void deleteComments(String commentsNo) throws Exception;
 }
