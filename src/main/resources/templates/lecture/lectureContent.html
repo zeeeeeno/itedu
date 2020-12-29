@@ -25,7 +25,7 @@
                     </div>
                     <div id="content_title" th:text="${lec.lectureName}"></div>
                     <div class="content_inContents" th:text="${lec.lectureTeacher}" style="margin-left: 5px;"></div>
-                    <div class="content_inContents" th:text="${lec.lecturePrice}" style="margin-left: 5px;"></div>
+                    <div class="content_inContents" th:text="'₩' + ${lec.lecturePrice}" style="margin-left: 5px;"></div>
                 </div>
             </div>
         </div>

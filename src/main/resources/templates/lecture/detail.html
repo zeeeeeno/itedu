@@ -7,8 +7,8 @@
 <body layout:fragment="content">
     <div style="background-color: rgb(82, 82, 82); width: 100%; height: 200px; padding-top: 17px;">
         <div style="width: 75%; height: 90%; margin: 0px auto;">
-            <div style="float: left; margin-right: 20px;">
-                <img th:src="|/images/${lecture.lectureThumbnail}|" style="width: 300px; height: 165px; border-radius: 3vh;">
+            <div style="float: left; margin-right: 20px; overflow: hidden;">
+                <img th:src="|/images/${lecture.lectureThumbnail}|" height="170" width="200" style="border-radius: 3vh;">
             </div>
             <div style="height: 100%; vertical-align: middle; padding-top: 20px;">
                 <div style="color: white; margin: 10px;">
@@ -87,8 +87,8 @@
                 <form th:object="${commentsDTO}" th:action="@{/comments/register/{lectureNo} (lectureNo = ${lecture.lectureNo})}" method="post">
                     <input th:if="${session.member} != null and ${isClassListen} == true" th:name="commentsContents" placeholder="후기를 입력하세요." style="height: 50px; width: 80%; float: left;">
                     <button class="btn-secondary" th:if="${session.member} != null and ${isClassListen} == true" type="submit" style="height: 50px; width: 20%; border: none; float: left;">입력</button>
-                    <input th:if="${session.member == null}" readonly="readonly" placeholder="수강신청한 인원만 작성할 수 있습니다." style="height: 50px; width: 80%; float: left;">
-                    <button th:if="${session.member == null}" class="btn-secondary" type="submit" disabled="disabled" style="height: 50px; width: 20%;">입력</button>
+                    <input th:if="${session.member} == null or ${isClassListen} == false" readonly="readonly" placeholder="수강신청한 인원만 작성할 수 있습니다." style="height: 50px; width: 80%; float: left;">
+                    <button th:if="${session.member} == null or ${isClassListen} == false" class="btn-secondary" type="submit" disabled="disabled" style="height: 50px; width: 20%;">입력</button>
                 </form>
             </div>
         </div>
